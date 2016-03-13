@@ -1,0 +1,9 @@
+[user]
+	name = Garrett Maring
+	email = gmaring@apple.com
+[colorl]
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
