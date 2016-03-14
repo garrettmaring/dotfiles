@@ -2,7 +2,6 @@
 #
 #
 echo "Loading ${HOME}/.bash_profile"
+sh ~/dotfiles/create-dotfile-links.sh # Create linkes from dotfile dir to global
 source ~/.profile # Get the paths
-source ~/.bashrc  # get aliases
-#echo 'source ~/.bashrc' >> ~/.bash_profile
-#source ~/.bashrc
+source ~/.bashrc  # Get aliases

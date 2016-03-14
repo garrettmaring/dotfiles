@@ -1,4 +1,4 @@
-for f in $(find . -regex "\./\..*") 
+for f in $(find ~/dotfiles -regex "\./\..*") 
 do
   g=$(echo $f | cut -c 3-)
   rm ~/$g
