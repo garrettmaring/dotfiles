@@ -15,11 +15,25 @@ filetype plugin indent on    " required
 "" The Basics
 syntax on
 filetype plugin indent on
-set nocompatible              " be iMproved, required
+set nocompatible
 set expandtab
 set shiftwidth=2
 set tabstop=2
 set number
+set mouse=a
+set ignorecase
+set smartcase
+set visualbell
+imap jk <ESC>
+
+"" Top Tabs
+"" Unmap ctr-w switch between panes. Make it []
+nnoremap <C-r> :tabnext<CR>
+nnoremap <C-e> :tabprev<CR>
+nnoremap <D-w> :tabclose<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-q> :tabedit<CR>
+
 
 "" It's so pretty! (Visual Preferences)
 " " Using dracula theme
