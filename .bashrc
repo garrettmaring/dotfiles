@@ -51,3 +51,8 @@ alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra21
 # Things for Apple
 alias cqlitms8="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_itms8 vp21q01if-ztdi23021301.vp.if1.apple.com"
 alias cqldev2="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_dev2 vp21q01if-ztdi23021301.vp.if1.apple.com"
+
+healthcheck() {
+  curl "https://silverbullet-admin-itms$1.itunes.apple.com/healthcheck"
+}
+alias silverhealth=healthcheck
