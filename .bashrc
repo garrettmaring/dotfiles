@@ -25,21 +25,14 @@ alias findali=findAlias
 alias gl="git log --graph --decorate --pretty=oneline"
 
 # Things for NPM/Node
-npmInstall() {
-  npm install $1 --save
-}
-
-npmInstallGlobal() {
-  npm install $1 -g
-}
-
-npmInstallDev() {
-  npm install $1 --save-dev
-}
-
-alias ni=npmInstall
-alias nig=npmInstallGlobal
-alias nid=npmInstallDev
+alias nis="npm install --save"
+alias nid="npm install --save-dev"
+alias nig="npm install --global"
+alias nt="npm test"
+alias nit="npm install && npm test"
+alias nk="npm link"
+alias nr="npm run"
+alias nf="npm cache clean && rm -rf node_modules && npm install"
 
 #Thing for tmux
 alias ttmux="vim ~/.tmux.conf"
