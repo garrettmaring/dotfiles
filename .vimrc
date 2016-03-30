@@ -25,6 +25,7 @@ set ignorecase
 set smartcase
 set visualbell
 imap jk <ESC>
+imap wjk <ESC> :w<CR>
 
 "" Top Tabs
 "" Unmap ctr-w switch between panes. Make it []
