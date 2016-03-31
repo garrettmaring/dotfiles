@@ -25,6 +25,7 @@ set mouse=a
 set ignorecase
 set smartcase
 set visualbell
+set incsearch " search as characters are entered
 imap jk <ESC>
 imap wjk <ESC> :w<CR>
 
