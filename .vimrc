@@ -7,7 +7,8 @@ Plugin 'scrooloose/nerdTree'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-sensible'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -28,15 +29,17 @@ imap jk <ESC>
 imap wjk <ESC> :w<CR>
 
 "" Top Tabs
-"" Unmap ctr-w switch between panes. Make it []
-nnoremap <C-r> :tabnext<CR>
-nnoremap <C-e> :tabprev<CR>
-nnoremap <C-q> :tabclose<CR>
-nnoremap <C-t> :tabnew<CR>
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+set hidden
+nmap <C-T> :enew<CR>
+nmap <C-l> :bnext<CR>
+nmap <C-h> :bprevious<CR>
+"" Closes a buffer and moves to previous one - like closing a tab
+nmap <C-p> :bp <BAR> bd #<CR>
 
 "" It's so pretty! (Visual Preferences)
-" " Using dracula theme
+"" Using dracula theme (see plugins)
 
 "" NerdTree Preferences
 map <C-n> :NERDTreeToggle<CR>
