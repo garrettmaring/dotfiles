@@ -28,6 +28,7 @@ set visualbell
 set incsearch " search as characters are entered
 imap jk <ESC>
 imap wjk <ESC> :w<CR>
+nmap qq :q<CR> 
 
 "" Top Tabs
 let g:airline#extensions#tabline#enabled = 1
