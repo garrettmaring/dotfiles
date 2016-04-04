@@ -1,3 +1,4 @@
+echo "Creating links..."
 for f in $(find ~/dotfiles -regex "\./\..*") 
 do
   g=$(echo $f | cut -c 3-)
