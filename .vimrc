@@ -26,9 +26,9 @@ set ignorecase
 set smartcase
 set visualbell
 set incsearch " search as characters are entered
-imap jk <ESC>
-imap wjk <ESC> :w<CR>
-nmap qq :q<CR> 
+map jk <ESC>
+map wjk <ESC> :w<CR>
+map qq :q<CR> 
 
 "" Top Tabs
 let g:airline#extensions#tabline#enabled = 1
