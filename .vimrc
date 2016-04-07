@@ -4,9 +4,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdTree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'Raimondi/delimitMate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -14,6 +14,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 "" The Basics
+let mapleader=","
 syntax on
 filetype plugin indent on
 set nocompatible
@@ -26,19 +27,19 @@ set ignorecase
 set smartcase
 set visualbell
 set incsearch " search as characters are entered
-map jk <ESC>
-map wjk <ESC> :w<CR>
-map qq :q<CR> 
+inoremap jk <ESC>
+noremap wjk <ESC> :w<CR>
+noremap qq :q<CR> 
 
 "" Top Tabs
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set hidden
-nmap <C-T> :enew<CR>
-nmap <C-l> :bnext<CR>
-nmap <C-h> :bprevious<CR>
+nnoremap <C-T> :enew<CR>
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprevious<CR>
 "" Closes a buffer and moves to previous one - like closing a tab
-nmap <C-p> :bp <BAR> bd #<CR>
+nnoremap <C-p> :bp <BAR> bd #<CR>
 
 "" It's so pretty! (Visual Preferences)
 "" Using dracula theme (see plugins)
