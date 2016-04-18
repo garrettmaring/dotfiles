@@ -1,9 +1,51 @@
+echo ".zshrc: configuring aliases, setting defaults, performing minor ritual..."
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/garrettmaring/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
 # Global configs
 export EDITOR=vim
+ZSH_THEME=pygmalion
+. ~/powerline/powerline/bindings/zsh/powerline.zsh
+
+# Antigen
+source ~/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+antigen bundle colorize
+antigen bundle jira
+antigen bundle vagrant
+antigen bundle brew
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+antigen theme agnoster
+
+# Tell antigen that you're done.
+antigen apply
 
 # Things for the shell
-alias aali="vim ~/.bashrc"
-alias reload="source ~/.bash_profile"
+alias aali="vim ~/.zshrc"
+alias reload="source ~/.zshrc"
 
 # Things for the web
 findPort() {
@@ -44,6 +86,7 @@ alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra21
 # Things for Apple
 alias cqlitms8="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_itms8 vp21q01if-ztdi23021301.vp.if1.apple.com"
 alias cqldev2="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_dev2 vp21q01if-ztdi23021301.vp.if1.apple.com"
+alias moz="cd ~/Projects/mozartui && vim server.js"
 
 healthcheck() {
   curl "https://silverbullet-admin-itms$1.itunes.apple.com/healthcheck"
