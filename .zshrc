@@ -46,6 +46,7 @@ antigen apply
 # Things for the shell
 alias aali="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
+alias la="ls -la"
 
 # Things for the web
 findPort() {
