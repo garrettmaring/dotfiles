@@ -1,7 +1,7 @@
 echo "Creating links..."
-for f in $(find ~/dotfiles -regex "\./\..*") 
+for f in $(find ~/dotfiles | grep -v "\.git" | cut -d "/" -f5 | grep -v "^$") 
 do
-  g=$(echo $f | cut -c 3-)
-  rm ~/$g
-  ln -s ~/dotfiles/$g ~/$g
+  echo "Linking ~/$f"
+  rm ~/$f
+  ln -s ~/dotfiles/$f ~/$f
 done
