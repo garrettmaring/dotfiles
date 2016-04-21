@@ -8,17 +8,11 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
-antigen bundle heroku
 antigen bundle pip
-antigen bundle lein
 antigen bundle command-not-found
 antigen bundle colorize
-antigen bundle jira
 antigen bundle vagrant
 antigen bundle brew
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 antigen theme agnoster
@@ -33,24 +27,32 @@ SAVEHIST=1000
 
 # Global configs
 export EDITOR=vim
-#. ~/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Zsh vim mode
 bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^w' backward-kill-word
+
+# Configure the Prompt
 precmd() {
   RPROMPT=""
-  }
-  zle-keymap-select() {
-    RPROMPT=""
-  [[ $KEYMAP = vicmd ]] && RPROMPT="NORMAL"
-    () { return $__prompt_status }
-  zle reset-prompt
-  }
-  zle-line-init() {
-    typeset -g __prompt_status="$?"
 }
+
+zle-keymap-select() {
+  RPROMPT=""
+  [[ $KEYMAP = vicmd ]] && RPROMPT="NORMAL"
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+
+# These attach the above widgets to the zle functions that get called on mode changes
 zle -N zle-keymap-select
 zle -N zle-line-init
+# Reduce the time zsh takes to check for special characters
 export KEYTIMEOUT=1
 
 # Fasd
