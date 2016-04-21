@@ -1,21 +1,4 @@
 echo ".zshrc: configuring aliases, setting defaults, performing minor ritual..."
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/garrettmaring/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# Global configs
-export EDITOR=vim
-ZSH_THEME=pygmalion
-. ~/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Antigen
 source ~/antigen/antigen.zsh
@@ -42,6 +25,41 @@ antigen theme agnoster
 
 # Tell antigen that you're done.
 antigen apply
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+# Global configs
+export EDITOR=vim
+#. ~/powerline/powerline/bindings/zsh/powerline.zsh
+
+# Zsh vim mode
+bindkey -v
+precmd() {
+  RPROMPT=""
+  }
+  zle-keymap-select() {
+    RPROMPT=""
+  [[ $KEYMAP = vicmd ]] && RPROMPT="NORMAL"
+    () { return $__prompt_status }
+  zle reset-prompt
+  }
+  zle-line-init() {
+    typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+export KEYTIMEOUT=1
+
+# Fasd
+eval "$(fasd --init auto)"
+alias ds="fasd -d | tr -s ' ' | cut -d ' ' -f 2"
+unalias z
+function z () {
+  cd $(ds | fzf)
+}
 
 # Things for the shell
 alias aali="vim ~/.zshrc"
@@ -93,3 +111,4 @@ healthcheck() {
   curl "https://silverbullet-admin-itms$1.itunes.apple.com/healthcheck"
 }
 alias silverhealth=healthcheck
+
