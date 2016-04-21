@@ -54,6 +54,7 @@ nnoremap <TAB> :b #<CR>
 "" NerdTree Preferences
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
+nnoremap <LEADER>nf :NERDTreeFind<CR>
 
 "" Syntastic
 let g:syntastic_javascript_checkers = ['eslint']
