@@ -86,6 +86,11 @@ alias findali=findAlias
 
 # Things for git
 alias gl="git log --graph --decorate --pretty=oneline"
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git commit"
+alias gcan="git commit --amend --no-edit"
+alias gs="git status"
 
 # Things for NPM/Node
 alias nis="npm install --save"

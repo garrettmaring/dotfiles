@@ -33,7 +33,6 @@ set visualbell
 set incsearch " search as characters are entered
 inoremap jk <ESC>
 inoremap wjk <ESC> :w<CR>
-noremap qq :q<CR> 
 noremap <LEADER>source :source ~/.vimrc<CR> "" Reload vim settings
 
 
