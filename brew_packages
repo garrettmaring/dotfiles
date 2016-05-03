@@ -1,0 +1,17 @@
+antigen
+cmake
+fasd
+fzf
+git
+git-crypt
+node
+tmux
+mongodb
+mysql
+postgresql
+openssl
+python
+python3
+phantomjs
+vim
+zsh
