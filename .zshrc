@@ -2,7 +2,6 @@ echo ".zshrc: configuring aliases, setting defaults, performing minor ritual..."
 
 # Antigen
 source $(brew --prefix)/share/antigen.zsh
-# source ~/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
