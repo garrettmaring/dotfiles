@@ -23,9 +23,9 @@ printf "\n/*----------  Configuring dotfiles  ----------*/\n\n"
 bash create-dotfile-links.sh
 
 # ## Install Homebrew
-if [ hash brew -v ]; then ## Check if homebrew is already installed
+if ! hash brew 2>/dev/null; then ## Check if homebrew is already installed
   printf "\n/*----------  Downloading Homebrew  ----------*/\n\n"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  sudo -u $NAME /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 ## Installing brew packages, gems, node modules, and python packages
@@ -63,9 +63,10 @@ sudo -u $NAME vim +PluginInstall +qall
 sudo -u $NAME brew link vim # Set default vim to be brew's vim
 
 ## Make zsh default shell
+# TODO: Do check for if is in /etc/shells already
 printf "\n/*----------  Setting up zsh  ----------*/\n\n"
 echo "/usr/local/bin/zsh" >> /etc/shells
-sudo -u $NAME chsh -s /usr/local/bin/zsh
+sudo -u $NAME chsh -s $(which zsh)
 # Downloading and installing powerline fonts
 cd
 git clone https://github.com/powerline/fonts.git
@@ -73,6 +74,6 @@ git clone https://github.com/powerline/fonts.git
 
 cat << Footer
 
-/*=====  All done. Taking Hyperdrive offline  ======*/
+/*=====  All done. Taking Hyperdrive offline. Please restart your terminal!  ======*/
 
 Footer
