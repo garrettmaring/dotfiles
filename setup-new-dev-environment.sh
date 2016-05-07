@@ -55,12 +55,12 @@ cp /usr/local/Cellar/postgresql/9.2.1/homebrew.mxcl.postgresql.plist ~/Library/L
 
 ## Vim
 printf "\n/*----------  Setting up Vim  ----------*/\n\n"
-if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+sudo -u $NAME brew link vim # Set default vim to be brew's vim
+if [ ! -d ~/.vim/bundle ]; then
+  sudo -u $NAME git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
 sudo -u $NAME vim +PluginInstall +qall
-sudo -u $NAME brew link vim # Set default vim to be brew's vim
 
 ## Make zsh default shell
 # TODO: Do check for if is in /etc/shells already
@@ -69,7 +69,7 @@ echo "/usr/local/bin/zsh" >> /etc/shells
 sudo -u $NAME chsh -s $(which zsh)
 # Downloading and installing powerline fonts
 cd
-git clone https://github.com/powerline/fonts.git
+sudo -u $NAME  git clone https://github.com/powerline/fonts.git
 ./fonts/install.sh
 
 cat << Footer
