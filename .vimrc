@@ -13,7 +13,6 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
 
 "" The Basics
 let mapleader=","
