@@ -122,3 +122,6 @@ alias silverhealth=healthcheck
 # Things for local machine
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES"
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles NO"
+
+# Things for Casa
+alias rlc="sh lib/scripts/relink_command.sh"
