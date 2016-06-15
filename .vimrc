@@ -1,31 +1,32 @@
-" Vundle Set Up!
-
+" Vundle
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
+call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'benekastah/neomake'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'Shougo/deoplete.nvim'
 Plugin 'Valloric/ListToggle'
-
-call vundle#end()            " required
+Plugin 'ternjs/tern_for_vim'
+call vundle#end()
 
 "" The Basics
-let mapleader=","
+let mapleader="\<Space>"
 syntax on
 filetype plugin indent on
 set backspace=indent,eol,start "" Backspace works as expected
 set expandtab "" Tab key inserts spaces instead of tab character
-set smarttab
+set smarttab "" Indents conform to edited tab settings
 set softtabstop=0
 set shiftwidth=2 "" Width of an indent in spaces
 set tabstop=2 "" Width of a hardtabstop in spaces
@@ -36,11 +37,11 @@ set smartcase "" If capitals entered, will not ignore case
 set visualbell
 set incsearch " search as characters are entered
 inoremap jk <ESC>
-inoremap wjk <ESC> :w<CR>
-noremap <LEADER>source :source ~/.vimrc<CR> "" Reload vim settings
+noremap <LEADER>w <ESC> :w<CR>
+noremap <LEADER>q <ESC> :q<CR>
+noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 
-
-"" Top Tabs
+"" Tab Bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set hidden
@@ -50,26 +51,50 @@ nnoremap <C-h> :bprevious<CR>
 "" Closes a buffer and moves to previous one - like closing a tab
 nnoremap <C-p> :bp <BAR> bd #<CR>
 "" Go back and forth between last open buffer
-nnoremap <TAB> :b #<CR>
+nnoremap <TAB> :b #<CR> 
 
-"" Visual Preferences
-
-"" NerdTree Preferences
+"" NerdTree
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 
 "" Neomake
-" Check file after every write
+" Check files after every write and write
 autocmd! BufWritePost * Neomake
-" Check file after every read
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_scss_enabled_makers = ['stylelint']
-let g:neomake_open_list = 2
+let g:neomake_open_list = 2 " So location buffer can open
+
+"" Deoplete (Autocomplete)
+let g:deoplete#enable_at_startup = 1
+" If there aren't input patterns set for completion, set it to {}
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" Tab for completion
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 "" ListToggle
 let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_quickfix_list_toggle_map = '<leader>qf'
+
+"""""""""""""""""""""
+"" Languages
+""""""""""""""""""""
+
+"" Javascript
+au filetype javascript nnoremap <leader>t :TernType<CR>
+au filetype javascript nnoremap <leader>f :TernDef<CR>
+au filetype javascript nnoremap K :TernDoc<CR>
+au FileType javascript setlocal omnifunc=tern#Complete
+let g:jsx_ext_required = 0 " Will use jsx highlighting on .js extension
+let g:tern_show_argument_hints='on_move'
+
+"" CSS & SCSS
+au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+au FileType scss setlocal omnifunc=csscomplete#CompleteCSS
+
+"" Rust
