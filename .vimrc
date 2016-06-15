@@ -24,6 +24,9 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer' " Rust autocomplete
 call vundle#end()
 
+"" Colors & Themes
+color smyck
+
 "" The Basics
 let mapleader="\<Space>"
 syntax on
