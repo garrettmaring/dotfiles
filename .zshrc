@@ -102,7 +102,7 @@ alias nk="npm link"
 alias nr="npm run"
 alias nf="npm cache clean && rm -rf node_modules && npm install"
 
-#Thing for tmux
+# Thing for tmux
 alias ttmux="vim ~/.tmux.conf"
 
 # Things for Cassandra
