@@ -43,6 +43,7 @@ set ignorecase
 set smartcase "" If capitals entered, will not ignore case
 set visualbell
 set incsearch " search as characters are entered
+set nopaste
 inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 noremap <LEADER>q <ESC> :q<CR>
@@ -102,9 +103,9 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>qf'
 
-"""""""""""""""""""""
-"" Languages
-""""""""""""""""""""
+"""""""""""""""""
+" Languages
+"""""""""""""""""
 
 "" Javascript
 au filetype javascript nnoremap <leader>t :TernType<CR>
@@ -127,3 +128,12 @@ augroup END
 "" Rust
 let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
 let $RUST_SRC_PATH="/usr/local/src/rust/src"
+
+
+"""""""""""""""""
+" Insanity
+"""""""""""""""""
+
+"" Mappings to execute tests in the adjacent pane from vim
+nnoremap <LEADER>tr <ESC> :silent !tmux send-keys -t right "cargo test" C-m<CR>
+nnoremap <LEADER>tj <ESC> :silent !tmux send-keys -t right "npm test" C-m<CR>

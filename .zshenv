@@ -1,4 +1,4 @@
-echo ".zshenv is configuring global variables..."
+# echo ".zshenv is configuring global variables..."
 
 # Show current directory in CLI
 export PS1="[%* - %D] %d %% "
