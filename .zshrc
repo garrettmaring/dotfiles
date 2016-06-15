@@ -75,9 +75,9 @@ findPort() {
 alias whereserver=findPort
 
 # Things for Vim
-alias v="vim"
-alias vvim="vim ~/.vimrc"
-alias vplugi="vim +PluginInstall +qall"
+alias v="nvim"
+alias vvim="nvim ~/.vimrc"
+alias vplugi="nvim +PluginInstall +qall"
 
 findAlias() {
   alias | grep $1
