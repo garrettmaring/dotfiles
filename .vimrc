@@ -66,6 +66,7 @@ autocmd! BufWritePost * Neomake
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_open_list = 2
 
 "" ListToggle
