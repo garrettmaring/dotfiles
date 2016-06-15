@@ -14,7 +14,6 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'benekastah/neomake'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'Valloric/ListToggle'
 Plugin 'ternjs/tern_for_vim'
@@ -112,7 +111,6 @@ au filetype javascript nnoremap <leader>type :TernType<CR>
 au filetype javascript nnoremap <leader>def :TernDef<CR>
 au filetype javascript nnoremap <LEADER>doc :TernDoc<CR>
 au FileType javascript setlocal omnifunc=tern#Complete
-let g:jsx_ext_required = 0 " Will use jsx highlighting on .js extension
 let g:tern_show_argument_hints='on_move'
 
 "" CSS & SCSS
