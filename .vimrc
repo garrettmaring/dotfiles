@@ -108,9 +108,9 @@ let g:lt_quickfix_list_toggle_map = '<leader>qf'
 """""""""""""""""
 
 "" Javascript
-au filetype javascript nnoremap <leader>t :TernType<CR>
-au filetype javascript nnoremap <leader>f :TernDef<CR>
-au filetype javascript nnoremap K :TernDoc<CR>
+au filetype javascript nnoremap <leader>type :TernType<CR>
+au filetype javascript nnoremap <leader>def :TernDef<CR>
+au filetype javascript nnoremap <LEADER>doc :TernDoc<CR>
 au FileType javascript setlocal omnifunc=tern#Complete
 let g:jsx_ext_required = 0 " Will use jsx highlighting on .js extension
 let g:tern_show_argument_hints='on_move'
