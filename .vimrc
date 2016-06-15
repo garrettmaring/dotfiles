@@ -8,14 +8,13 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'benekastah/neomake'
-Plugin 'pangloss/vim-javascript'
 Plugin 'Shougo/deoplete.nvim'
-Plugin 'Valloric/ListToggle'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -28,8 +27,9 @@ color smyck
 
 "" The Basics
 let mapleader="\<Space>"
-syntax on
+syntax enable
 filetype plugin indent on
+set nopaste
 set backspace=indent,eol,start "" Backspace works as expected
 set expandtab "" Tab key inserts spaces instead of tab character
 set smarttab "" Indents conform to edited tab settings
@@ -42,7 +42,6 @@ set ignorecase
 set smartcase "" If capitals entered, will not ignore case
 set visualbell
 set incsearch " search as characters are entered
-set nopaste
 inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 noremap <LEADER>q <ESC> :q<CR>
@@ -79,14 +78,19 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 "" Neomake
-" Check files after every write and write
+" Check files after every write and read
 autocmd! BufWritePost * Neomake
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_scss_enabled_makers = ['stylelint']
-let g:neomake_open_list = 2 " So location buffer can open
+let g:neomake_rust_enabled_makers = ['rustc']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_open_list = 2
+
+" load local eslint in the project root
+" modified from https://github.com/mtscout6/syntastic-local-eslint.vim
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 "" Deoplete (Autocomplete)
 let g:deoplete#enable_at_startup = 1
@@ -97,10 +101,6 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 " Tab for completion
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-"" ListToggle
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>qf'
 
 """""""""""""""""
 " Languages
@@ -133,5 +133,5 @@ let $RUST_SRC_PATH="/usr/local/src/rust/src"
 """""""""""""""""
 
 "" Mappings to execute tests in the adjacent pane from vim
-nnoremap <LEADER>tr <ESC> :silent !tmux send-keys -t right "cargo test" C-m<CR>
-nnoremap <LEADER>tj <ESC> :silent !tmux send-keys -t right "npm test" C-m<CR>
+nnoremap <LEADER>tstr <ESC> :silent !tmux send-keys -t right "cargo test" C-m<CR>
+nnoremap <LEADER>tstj <ESC> :silent !tmux send-keys -t right "npm test" C-m<CR>
