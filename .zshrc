@@ -27,6 +27,8 @@ SAVEHIST=1000
 
 # Global configs
 export EDITOR=vim
+export RUST_SRC_PATH="/usr/local/src/rust/src"
+export PATH="$PATH:/usr/local/src/racer/target/release/"
 
 # Zsh vim mode
 bindkey -v

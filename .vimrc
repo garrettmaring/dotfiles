@@ -7,17 +7,21 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'rust-lang/rust.vim'
 Plugin 'benekastah/neomake'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'Valloric/ListToggle'
 Plugin 'ternjs/tern_for_vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer' " Rust autocomplete
 call vundle#end()
 
 "" The Basics
@@ -58,6 +62,19 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 
+"" NerdTree Git
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
 "" Neomake
 " Check files after every write and write
 autocmd! BufWritePost * Neomake
@@ -73,6 +90,7 @@ let g:deoplete#enable_at_startup = 1
 " If there aren't input patterns set for completion, set it to {}
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
+  let g:deoplete#omni#input_patterns.javascript = ['[^. *\t]\.\w*']
 endif
 " Tab for completion
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -94,7 +112,15 @@ let g:jsx_ext_required = 0 " Will use jsx highlighting on .js extension
 let g:tern_show_argument_hints='on_move'
 
 "" CSS & SCSS
+au BufRead,BufNewFile *.scss set filetype=scss.css
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType scss setlocal omnifunc=csscomplete#CompleteCSS
+augroup VimCSS3Syntax " This fixes issues with names like vertical-align etc.
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
 
 "" Rust
+let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
+let $RUST_SRC_PATH="/usr/local/src/rust/src"
