@@ -9,6 +9,7 @@ Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -82,13 +83,13 @@ let g:NERDTreeIndicatorMapCustom = {
 autocmd! BufWritePost * Neomake
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
-let g:neomake_scss_enabled_makers = ['stylelint']
+let g:neomake_css_enabled_makers = ['stylelint']
 let g:neomake_rust_enabled_makers = ['rustc']
-let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_open_list = 2
 
 " load local eslint in the project root
 " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
+let g:neomake_javascript_enabled_makers = ['eslint']
 let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
 let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
@@ -112,6 +113,7 @@ au filetype javascript nnoremap <leader>def :TernDef<CR>
 au filetype javascript nnoremap <LEADER>doc :TernDoc<CR>
 au FileType javascript setlocal omnifunc=tern#Complete
 let g:tern_show_argument_hints='on_move'
+let g:jsx_ext_required = 0
 
 "" CSS & SCSS
 au BufRead,BufNewFile *.scss set filetype=scss.css
