@@ -127,3 +127,6 @@ alias hidehidden="defaults write com.apple.finder AppleShowAllFiles NO"
 
 # Things for Casa
 alias rlc="sh lib/scripts/relink_command.sh"
+
+# Things for Python
+alias python=python3
