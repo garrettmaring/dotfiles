@@ -32,6 +32,7 @@ syntax enable
 filetype plugin indent on
 set nopaste
 set backspace=indent,eol,start "" Backspace works as expected
+set autoindent "" Copies indentation of current line when entering a new line with 'O'
 set expandtab "" Tab key inserts spaces instead of tab character
 set smarttab "" Indents conform to edited tab settings
 set softtabstop=0
@@ -42,7 +43,11 @@ set mouse=a "" Mouse events
 set ignorecase
 set smartcase "" If capitals entered, will not ignore case
 set visualbell
-set incsearch " search as characters are entered
+set incsearch " Search as characters are entered
+set hlsearch " Highlight matches
+set synmaxcol=0 " No column length restriction for syntax highlighting
+set title " Vim controls tab title
+set noswapfile " No .swp file
 inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 noremap <LEADER>q <ESC> :q<CR>
