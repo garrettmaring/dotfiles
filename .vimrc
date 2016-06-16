@@ -1,5 +1,5 @@
 " Vundle
-set nocompatible
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -57,16 +57,14 @@ noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set hidden
-nnoremap <C-T> :enew<CR>
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprevious<CR>
+nnoremap <C-t> :enew<CR>
+nnoremap <TAB> :bnext<CR>
+nnoremap <S-TAB> :bprevious<CR>
 "" Closes a buffer and moves to previous one - like closing a tab
 nnoremap <C-p> :bp <BAR> bd #<CR>
-"" Go back and forth between last open buffer
-nnoremap <TAB> :b #<CR> 
 
 "" NerdTree
-map <C-n> :NERDTreeToggle<CR>
+map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 
@@ -89,6 +87,7 @@ autocmd! BufWritePost * Neomake
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_css_enabled_makers = ['stylelint']
+let g:neomake_scss_enabled_makers = ['stylelint']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_open_list = 2
 
