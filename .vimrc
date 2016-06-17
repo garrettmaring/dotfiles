@@ -87,7 +87,7 @@ autocmd! BufWritePost * Neomake
 autocmd! BufReadPost * Neomake
 let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_css_enabled_makers = ['stylelint']
-let g:neomake_scss_enabled_makers = ['stylelint']
+"let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_open_list = 2
 
