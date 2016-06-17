@@ -106,6 +106,7 @@ alias nf="npm cache clean && rm -rf node_modules && npm install"
 
 # Thing for tmux
 alias ttmux="nvim ~/.tmux.conf"
+alias tm="tmux -2"
 
 # Things for Cassandra
 alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
