@@ -44,7 +44,6 @@ set ignorecase
 set smartcase "" If capitals entered, will not ignore case
 set visualbell
 set incsearch " Search as characters are entered
-set hlsearch " Highlight matches
 set synmaxcol=0 " No column length restriction for syntax highlighting
 set title " Vim controls tab title
 set noswapfile " No .swp file
