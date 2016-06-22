@@ -68,6 +68,9 @@ map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 
+"" Git
+au FileType gitcommit set tw=72
+
 "" NerdTree Git
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
