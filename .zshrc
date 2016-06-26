@@ -66,6 +66,10 @@ function z () {
 }
 
 # Things for the shell
+findAlias() {
+  alias | grep $1
+}
+alias findali=findAlias
 alias aali="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias la="ls -la"
@@ -80,11 +84,10 @@ alias whereserver=findPort
 alias v="nvim"
 alias vvim="nvim ~/.vimrc"
 alias vplugi="nvim +PluginInstall +qall"
+# Making ctrl-h work in neovim
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/$TERM.ti
+tic ~/$TERM.ti
 
-findAlias() {
-  alias | grep $1
-}
-alias findali=findAlias
 
 # Things for git
 alias gl="git log --graph --decorate --pretty=oneline"

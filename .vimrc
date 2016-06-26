@@ -57,11 +57,13 @@ noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set hidden
-nnoremap <C-t> :enew<CR>
-nnoremap <TAB> :bnext<CR>
-nnoremap <S-TAB> :bprevious<CR>
+nnoremap <C-T> :enew<CR>
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprevious<CR>
 "" Closes a buffer and moves to previous one - like closing a tab
 nnoremap <C-p> :bp <BAR> bd #<CR>
+"" Go back and forth between last open buffer
+nnoremap <C-TAB> :b #<CR>
 
 "" NerdTree
 map <LEADER>n :NERDTreeToggle<CR>
