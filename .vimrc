@@ -1,5 +1,4 @@
 " Vundle
-
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -22,6 +21,7 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer' " Rust autocomplete
+Plugin 'wikitopian/hardmode'
 call vundle#end()
 
 "" Colors & Themes
@@ -53,6 +53,11 @@ inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 noremap <LEADER>q <ESC> :q<CR>
 noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
+
+"" Hard Mode
+autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+
 
 "" Tab Bar
 let g:airline#extensions#tabline#enabled = 1
