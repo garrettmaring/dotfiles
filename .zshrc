@@ -29,6 +29,7 @@ SAVEHIST=1000
 export EDITOR=vim
 export RUST_SRC_PATH="/usr/local/src/rust/src"
 export PATH="$PATH:/usr/local/src/racer/target/release/"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Zsh vim mode
 bindkey -v
@@ -66,6 +67,38 @@ function z () {
 }
 
 # Things for the shell
+
+#####################
+## ZSH force alias ##
+#####################
+zle -N expand-aliases
+bindkey '^E' expand-aliases
+
+(force-alias-server > /dev/null &) > /dev/null 2>&1
+if [[ -z "$NO_CHECK" ]]; then
+  force-alias-client --init
+fi
+
+function force_alias_hook() {
+  if ! [[ -z "$NO_CHECK" ]]; then
+    zle accept-line
+    return
+  fi
+  force-alias-client $BUFFER
+  if [[ $? -eq 1 ]]; then
+    BUFFER=""
+  fi
+  zle accept-line
+}
+
+autoload -U add-zsh-hook
+zle -N force_alias_hook
+bindkey '^J' force_alias_hook
+bindkey '^M' force_alias_hook
+#########################
+## End ZSH force alias ##
+#########################
+
 findAlias() {
   alias | grep $1
 }
