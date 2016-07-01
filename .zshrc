@@ -169,3 +169,6 @@ alias rlc="sh lib/scripts/relink_command.sh"
 
 # Things for Python
 alias python=python3
+
+# Misc.
+alias gglr="googler -n5"
