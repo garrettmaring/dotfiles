@@ -39,6 +39,7 @@ set smarttab "" Indents conform to edited tab settings
 set softtabstop=0
 set shiftwidth=2 "" Width of an indent in spaces
 set tabstop=2 "" Width of a hardtabstop in spaces
+set relativenumber
 set number "" Line Numbers
 set mouse=a "" Mouse events
 set ignorecase
