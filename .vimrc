@@ -22,6 +22,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer' " Rust autocomplete
 Plugin 'wikitopian/hardmode'
+Plugin 'keith/swift.vim'
 call vundle#end()
 
 "" Colors & Themes
