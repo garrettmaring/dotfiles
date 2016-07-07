@@ -123,6 +123,7 @@ tic ~/$TERM.ti
 
 
 # Things for git
+alias gs="git status"
 alias gl="git log --graph --decorate --pretty=oneline"
 alias gaa="git add ."
 alias gcan="git commit --amend --no-edit"
