@@ -51,15 +51,19 @@ set incsearch " Search as characters are entered
 set synmaxcol=0 " No column length restriction for syntax highlighting
 set title " Vim controls tab title
 set noswapfile " No .swp file
+
+"" Mappings
 inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 noremap <LEADER>q <ESC> :q<CR>
 noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
+"" Quickly highlight everything inside block (inclusive)
+noremap <LEADER>%% V$%
+vnoremap <LEADER>%% $%
 
 "" Hard Mode
 autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
 
 "" Tab Bar
 let g:airline#extensions#tabline#enabled = 1
