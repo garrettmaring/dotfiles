@@ -24,6 +24,7 @@ Plugin 'racer-rust/vim-racer' " Rust autocomplete
 Plugin 'wikitopian/hardmode'
 Plugin 'keith/swift.vim'
 Plugin 'craigemery/vim-autotag'
+Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()
 
 "" Colors & Themes
