@@ -10,8 +10,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'benekastah/neomake'
@@ -29,6 +28,15 @@ call vundle#end()
 
 "" Colors & Themes
 color smyck
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
+      \ 'separator': { 'left': "\ue0b0" },
+      \ 'subseparator': { 'left': "\ue0b1" }
+      \ }
 
 "" The Basics
 let mapleader="\<Space>"
@@ -66,9 +74,6 @@ vnoremap <LEADER>%% $%
 autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
-"" Tab Bar
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
 set hidden
 nnoremap <C-T> :enew<CR>
 nnoremap <C-l> :bnext<CR>
