@@ -1,4 +1,4 @@
-" Vundle
+"rs+=vert:\| Vundle
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -41,6 +41,7 @@ let g:lightline = {
 
 set fillchars+=vert:\|
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Blue ctermbg=NONE
+autocmd ColorScheme * highlight Comment ctermfg=Red
 
 "" The Basics
 let mapleader="\<Space>"
