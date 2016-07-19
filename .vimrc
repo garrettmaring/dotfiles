@@ -30,13 +30,13 @@ call vundle#end()
 color smyck
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
-      \ 'separator': { 'left': "\ue0b0" },
-      \ 'subseparator': { 'left': "\ue0b1" }
-      \ }
+  \ 'colorscheme': 'wombat',
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'separator': { 'left': "\ue0b0" },
+  \ 'subseparator': { 'left': "\ue0b1" }
+\ }
 
 "" The Basics
 let mapleader="\<Space>"
@@ -113,6 +113,7 @@ let g:neomake_css_enabled_makers = ['stylelint']
 "let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_open_list = 2
+let g:neomake_list_height = 8 "Set location list height
 
 " load local eslint in the project root
 " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
