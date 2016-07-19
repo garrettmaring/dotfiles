@@ -29,6 +29,7 @@ call vundle#end()
 "" Colors & Themes
 color smyck
 
+"" Status Line
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'component': {
@@ -37,6 +38,9 @@ let g:lightline = {
   \ 'separator': { 'left': "\ue0b0" },
   \ 'subseparator': { 'left': "\ue0b1" }
 \ }
+
+set fillchars+=vert:\|
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Blue ctermbg=NONE
 
 "" The Basics
 let mapleader="\<Space>"
