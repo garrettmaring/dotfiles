@@ -24,6 +24,8 @@ Plugin 'wikitopian/hardmode'
 Plugin 'keith/swift.vim'
 Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 
 "" Colors & Themes
@@ -135,6 +137,12 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 " Tab for completion
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+"" Snippets
+let g:UltiSnipsExpandTrigger="<c-u>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 """""""""""""""""
 " Languages
