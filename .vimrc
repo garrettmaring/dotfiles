@@ -81,6 +81,17 @@ vnoremap <LEADER>%% $%
 autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
+"" Regex
+"" (http://vim.wikia.com/wiki/Simplifying_regular_expressions_using_magic_and_no-magic)
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
+
+
+"" Tabs
 set hidden
 nnoremap <C-T> :enew<CR>
 nnoremap <C-l> :bnext<CR>
