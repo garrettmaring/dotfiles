@@ -170,4 +170,3 @@ alias python=python3
 
 # Misc.
 alias gglr="googler -n5"
-if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
