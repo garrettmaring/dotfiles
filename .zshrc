@@ -168,5 +168,9 @@ alias rlc="sh lib/scripts/relink_command.sh"
 # Things for Python
 alias python=python3
 
+# Things for Swift
+alias sb="swift build"
+alias sbc="swift build --clean"
+
 # Misc.
 alias gglr="googler -n5"
