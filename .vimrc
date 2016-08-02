@@ -100,6 +100,11 @@ nnoremap <C-h> :bprevious<CR>
 nnoremap <C-p> :bp <BAR> bd #<CR>
 "" Go back and forth between last open buffer
 nnoremap <C-TAB> :b #<CR>
+"" Ignore QuickFix buffer
+augroup qf
+  autocmd!
+  autocmd FileType qf set nobuflisted
+augroup end
 
 "" NerdTree
 map <LEADER>n :NERDTreeToggle<CR>
