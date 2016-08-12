@@ -171,6 +171,9 @@ alias python=python3
 # Things for Swift
 alias sb="swift build"
 alias sbc="swift build --clean"
+export SWIFTENV_ROOT="$HOME/.swiftenv"
+export PATH="$SWIFTENV_ROOT/bin:$PATH"
+eval "$(swiftenv init -)"
 
 # Misc.
 alias gglr="googler -n5"
