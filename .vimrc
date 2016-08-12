@@ -76,6 +76,12 @@ noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 "" Quickly highlight everything inside block (inclusive)
 noremap <LEADER>%% V$%
 vnoremap <LEADER>%% $%
+"" Jump to beginning/end of code block
+noremap <LEADER>[ [{
+noremap <LEADER>] ]}
+"" Jump to beginning/end of parens
+noremap <LEADER>( [(
+noremap <LEADER>) ])
 
 "" Hard Mode
 autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
