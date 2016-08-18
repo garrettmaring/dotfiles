@@ -26,6 +26,9 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+"" Both the below plugins are needed for vim-notes
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 call vundle#end()
 
 "" Colors & Themes
@@ -165,6 +168,10 @@ let g:UltiSnipsExpandTrigger="<c-u>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Notes
+let g:notes_directories = ['~/Notes' ]
+
 
 """""""""""""""""
 " Languages
