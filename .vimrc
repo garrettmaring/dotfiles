@@ -30,6 +30,8 @@ Plugin 'Shougo/neosnippet'
 "" Both the below plugins are needed for vim-notes
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+"" Dash
+Plugin 'rizzatti/dash.vim'
 call vundle#end()
 
 "" Colors & Themes
@@ -139,6 +141,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+"" Dash
+nnoremap <Leader>d :Dash<CR>
 
 "" NerdTree
 map <LEADER>n :NERDTreeToggle<CR>
