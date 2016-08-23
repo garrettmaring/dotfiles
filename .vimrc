@@ -105,6 +105,10 @@ cnoremap \>s/ \>smagic/
 nnoremap :g/ :g/\v
 nnoremap :g// :g//
 
+"" Tables
+let g:table_mode_header_fillchar="="
+let g:table_mode_corner_corner="\u25CB"
+
 "" Tabs
 set hidden
 nnoremap <C-T> :enew<CR>
