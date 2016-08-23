@@ -105,14 +105,13 @@ cnoremap \>s/ \>smagic/
 nnoremap :g/ :g/\v
 nnoremap :g// :g//
 
-
 "" Tabs
 set hidden
 nnoremap <C-T> :enew<CR>
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprevious<CR>
 "" Closes a buffer and moves to previous one - like closing a tab
-nnoremap <C-p> :bp <BAR> bd #<CR>
+nnoremap <C-q> :bp <BAR> bd #<CR>
 "" Go back and forth between last open buffer
 nnoremap <C-TAB> :b #<CR>
 "" Ignore QuickFix buffer
