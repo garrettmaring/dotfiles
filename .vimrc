@@ -26,8 +26,7 @@ Plugin 'keith/swift.vim' " Swift syntax
 Plugin 'mitsuse/autocomplete-swift'
 Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'Shougo/neosnippet'
 "" Both the below plugins are needed for vim-notes
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
@@ -124,6 +123,23 @@ augroup qf
   autocmd FileType qf set nobuflisted
 augroup end
 
+"" Snippets
+let g:neosnippet#disable_runtime_snippets= {
+\   '_': 1,
+\ }
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
 "" NerdTree
 map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
@@ -175,12 +191,6 @@ endif
 " Tab for completion
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-"" Snippets
-let g:UltiSnipsExpandTrigger="<c-u>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " Notes
 let g:notes_directories = ['~/Notes' ]
 let g:notes_suffix = '.txt'
@@ -220,10 +230,6 @@ let g:neomake_swift_swiftlint_maker = {
       \ }
 let g:neomake_swift_enabled_makers = ['swiftlint']
 autocmd! BufWritePost *.swift :NeomakeSh swift build
-
-"" Will disable when using neosnippets
-"" (https://github.com/mitsuse/autocomplete-swift)
-autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
 
 
 """""""""""""""""
