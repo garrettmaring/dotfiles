@@ -1,4 +1,4 @@
-"rs+=vert:\| Vundle
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -22,7 +22,8 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer' " Rust autocomplete
 Plugin 'wikitopian/hardmode'
-Plugin 'keith/swift.vim'
+Plugin 'keith/swift.vim' " Swift syntax
+Plugin 'mitsuse/autocomplete-swift'
 Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'SirVer/ultisnips'
@@ -50,7 +51,6 @@ let g:lightline = {
 
 set fillchars+=vert:\|
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Blue ctermbg=NONE
-
 
 "" The Basics
 let mapleader="\<Space>"
@@ -163,11 +163,14 @@ let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
 let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 "" Deoplete (Autocomplete)
+
 let g:deoplete#enable_at_startup = 1
 " If there aren't input patterns set for completion, set it to {}
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
   let g:deoplete#omni#input_patterns.javascript = ['[^. *\t]\.\w*']
+  let g:deoplete#omni#input_patterns.swift =
+    \ ['[^. *\t]\.\w*']
 endif
 " Tab for completion
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -208,6 +211,19 @@ augroup END
 "" Rust
 let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
 let $RUST_SRC_PATH="/usr/local/src/rust/src"
+
+"" Swift
+let g:neomake_swift_swiftlint_maker = {
+      \ 'args': ['lint', '--config', './.swiftlint.yml', '--quiet'],
+      \ 'errorformat': '%f:%l:%c: %trror: %m,%f:%l:%c: %tarning: %m,%f:%l: %tarning: %m,%f:%l: %trror: %m',
+      \ 'append_file': 0,
+      \ }
+let g:neomake_swift_enabled_makers = ['swiftlint']
+autocmd! BufWritePost *.swift :NeomakeSh swift build
+
+"" Will disable when using neosnippets
+"" (https://github.com/mitsuse/autocomplete-swift)
+autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
 
 
 """""""""""""""""

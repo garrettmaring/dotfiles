@@ -16,3 +16,5 @@ phantomjs
 vim
 zsh
 rename
+swiftlint
+sourcekitten
