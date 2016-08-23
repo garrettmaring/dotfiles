@@ -129,6 +129,8 @@ augroup end
 let g:neosnippet#disable_runtime_snippets= {
 \   '_': 1,
 \ }
+"" Set directory
+let g:neosnippet#snippets_directory='~/.vim/Snippets'
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
