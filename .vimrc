@@ -35,6 +35,9 @@ call vundle#end()
 "" Colors & Themes
 color smyck
 
+autocmd ColorScheme * highlight Comment ctermfg=Red
+autocmd ColorScheme * highlight Folded ctermfg=Green cterm=NONE ctermbg=NONE
+
 "" Status Line
 let g:lightline = {
   \ 'colorscheme': 'wombat',
@@ -47,7 +50,7 @@ let g:lightline = {
 
 set fillchars+=vert:\|
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Blue ctermbg=NONE
-autocmd ColorScheme * highlight Comment ctermfg=Red
+
 
 "" The Basics
 let mapleader="\<Space>"
@@ -86,6 +89,8 @@ noremap <LEADER>] ]}
 "" Jump to beginning/end of parens
 noremap <LEADER>( [(
 noremap <LEADER>) ])
+"" Easier fold toggle
+noremap zz za
 
 "" Hard Mode
 autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
@@ -172,6 +177,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Notes
 let g:notes_directories = ['~/Notes' ]
+let g:notes_suffix = '.txt'
 
 
 """""""""""""""""
