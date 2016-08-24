@@ -45,7 +45,8 @@ filetype plugin indent on
 set noswapfile " No .swp file
 " force manually configuring pasted text
 set nopaste
-
+" default to English spelling
+set spelllang=en_us
 
 " esc
 inoremap jk <ESC>
@@ -76,6 +77,10 @@ set relativenumber
 set number
 " No column length restriction for syntax highlighting
 set synmaxcol=0
+" disable left scrollbar
+set guioptions-=l
+" disable right scrollbar
+set guioptions-=r
 " }}}
 " Mouse & Keyboard {{{
 " backspace works as expected
@@ -113,10 +118,12 @@ set ignorecase
 set smartcase
 " highlight search
 set hlsearch
+" substiture with /g by default
+set gdefault
+
 " turn off search highlight
 nnoremap <LEADER>nh :noh<CR>
-
-"" highlight everything inside block (inclusive)
+" highlight everything inside block (inclusive)
 noremap <LEADER>%% V$%
 vnoremap <LEADER>%% $%
 " }}}
