@@ -107,6 +107,10 @@ alias aali="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias la="ls -la"
 
+# Scripts {{{
+alias ffws="findFilesWithString"
+# }}}
+
 # Things for the web
 findPort() {
   lsof -wni tcp:$1
