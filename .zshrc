@@ -133,6 +133,8 @@ alias gaa="git add ."
 alias gcan="git commit --amend --no-edit"
 alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force"
+# Get path of root directory in git repo
+alias groot="git rev-parse --show-toplevel"
 
 # Things for NPM/Node
 alias nis="npm install --save"
