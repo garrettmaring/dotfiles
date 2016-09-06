@@ -107,6 +107,13 @@ alias aali="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias la="ls -la"
 
+# Navigation {{{
+mkCd() {
+  mkdir $1 && cd $1
+}
+alias mkcd=mkCd
+# }}}
+
 # Scripts {{{
 alias ffws="findFilesWithString"
 # }}}
