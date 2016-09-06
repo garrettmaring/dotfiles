@@ -63,6 +63,8 @@ color smyck
 autocmd ColorScheme * highlight Comment ctermfg=Red
 autocmd ColorScheme * highlight Folded ctermfg=Green cterm=NONE ctermbg=NONE
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Blue ctermbg=NONE
+
+au Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|READ\)')
 " }}}
 " UI Layout {{{
 " nicer vertical characters
