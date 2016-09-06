@@ -107,13 +107,20 @@ alias aali="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias la="ls -la"
 
-# Navigation {{{
+# File System & Navigation {{{
+# Make a new directory and cd into it {{{
 mkCd() {
   mkdir $1 && cd $1
 }
 alias mkcd=mkCd
 # }}}
-
+# Create a new note in the current directory with vim-note {{{
+newVimNote() {
+  v note:$1
+}
+alias vn=newVimNote
+# }}}
+# }}}
 # Scripts {{{
 alias ffws="findFilesWithString"
 # }}}
