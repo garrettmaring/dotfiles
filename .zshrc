@@ -160,6 +160,9 @@ alias nk="npm link"
 alias nr="npm run"
 alias nf="npm cache clean && rm -rf node_modules && npm install"
 
+# Things for Java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 # Thing for tmux
 alias ttmux="nvim ~/.tmux.conf"
 alias t2="tmux -2"
