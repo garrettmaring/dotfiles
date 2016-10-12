@@ -196,6 +196,7 @@ let $RUST_SRC_PATH="/usr/local/src/rust/src"
 " swift {{{
 " build on every write
 autocmd! BufWritePost *.swift :NeomakeSh swift build
+autocmd Filetype swift setlocal ts=4 sw=4 sts=0 expandtab
 " }}}
 " Languages }}}
 " Plugin Configs {{{
