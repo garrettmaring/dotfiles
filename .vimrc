@@ -177,9 +177,6 @@ au FileType gitcommit set tw=72
 " Languages {{{
 syntax enable
 
-" javascript {{{
-
-" }}}
 " css & friends {{{
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " this fixes issues with names like vertical-align etc.
@@ -244,6 +241,17 @@ nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 nnoremap <Leader>d :Dash<CR>
 " }}}
 " NerdTree {{{
+" open nerdTree when vim open
+autocmd vimenter * NERDTree
+" open nerdTre even if no files specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" open nerdTree if opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" close nerdTree if it's the only buffer left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
