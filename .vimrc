@@ -313,9 +313,15 @@ let g:jsx_ext_required = 0
 " Plugin Configs }}}
 " Misc {{{
 " add support for local .vimrc configurations
-set exrc
 
-" prevents shell commands from being run when .vimrc file is executed from
+" Search for a local.vim file
+let vfile = globpath(getcwd(), "**/local.vim")
+
+try 
+  exec "source" . vfile
+catch
+  " no-op
+endtry 
+
 " local .vimrc file. See http://vimdoc.sourceforge.net/htmldoc/options.html#'secure'
-set secure
 " }}}
