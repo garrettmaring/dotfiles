@@ -321,7 +321,7 @@ let g:jsx_ext_required = 0
 " add support for local .vimrc configurations
 
 " Search for a local.vim file
-let vfile = globpath(getcwd(), "**/local.vim")
+let vfile = globpath(getcwd(), "/Config/Vim/local.vim")
 
 try 
   exec "source" . vfile
