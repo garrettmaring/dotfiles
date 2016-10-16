@@ -283,6 +283,12 @@ let g:neomake_swift_swiftlint_maker = {
       \ 'errorformat': '%f:%l:%c: %trror: %m,%f:%l:%c: %tarning: %m,%f:%l: %tarning: %m,%f:%l: %trror: %m',
       \ 'append_file': 0,
       \ }
+
+nmap <Leader>lo :lopen<CR>
+nmap <Leader>lc :lclose<CR>
+nmap <Leader>ll :ll<CR>
+nmap <Leader>ln :lnext<CR>
+nmap <Leader>lp :lprev<CR>
 " }}}
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
