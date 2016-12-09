@@ -112,6 +112,8 @@ set shiftwidth=2
 set tabstop=2
 " }}}
 " Search & Select {{{
+" system clipboard support
+set clipboard=unnamed
 " search as characters are entered
 set incsearch
 " default to ignore case
@@ -128,6 +130,8 @@ nnoremap <LEADER>nh :noh<CR>
 " highlight everything inside block (inclusive)
 noremap <LEADER>%% V$%
 vnoremap <LEADER>%% $%
+" copy to system clipboard
+vnoremap <LEADER>C :w !pbcopy<CR>
 " }}}
 " Folding {{{
 set foldenable
