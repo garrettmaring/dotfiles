@@ -113,6 +113,7 @@ alias vn=newVimNote
 # }}}
 # Scripts {{{
 alias ffws="findFilesWithString"
+alias work="bash ~/Scripts/WorkScripts/launch_work_setup.sh"
 # }}}
 
 # Things for the web
@@ -150,16 +151,22 @@ alias nk="npm link"
 alias nr="npm run"
 alias nf="npm cache clean && rm -rf node_modules && npm install"
 
+# Things for Javascript
+export PATH="$PATH:`yarn global bin`"
+
 # Things for Java
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 # Thing for tmux
 alias ttmux="nvim ~/.tmux.conf"
 alias t2="tmux -2"
+alias tkill="tmux kill-session"
 
 # Things for Cassandra
-alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
-alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
+alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
+alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
+#alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
+#alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
 
 # Things for Apple
 alias cqlitms8="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_itms8 vp21q01if-ztdi23021301.vp.if1.apple.com"
