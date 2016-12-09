@@ -54,6 +54,10 @@ inoremap jk <ESC>
 noremap <LEADER>w <ESC> :w<CR>
 " quit
 noremap <LEADER>q <ESC> :q<CR>
+" quit all
+noremap <LEADER>qq <ESC> :qa<CR>
+" write and quit
+inoremap <LEADER>wq <ESC> :wq<CR>
 " load .vimrc
 noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 " }}}
