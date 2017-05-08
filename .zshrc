@@ -198,8 +198,14 @@ eval "$(swiftenv init -)"
 alias gglr="googler -n5"
 alias nomouse="bin/nomouse"
 alias c="clear"
-alias t = "trash"
-alias rm = "echo Don't remove using rm! Use trash."
+alias t="trash"
+
+# Prevent usage of rm
+function rm() {
+ echo Don\'t remove using rm! Use trash.
+}
+
+alias rm=rm
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
