@@ -27,9 +27,9 @@ SAVEHIST=1000
 
 # Global configs
 export EDITOR=vim
-export RUST_SRC_PATH="/usr/local/src/rust/src"
-export PATH="$PATH:/usr/local/src/racer/target/release/"
-export PATH="$PATH:$HOME/.cargo/bin"
+
+# Add user bin to path
+export PATH="$PATH:$HOME/bin"
 
 # Zsh vim mode
 bindkey -v
@@ -68,6 +68,10 @@ function z () {
 
 # Things for the shell
 
+# Rust
+export RUST_SRC_PATH="/usr/local/src/rust/src"
+export PATH="$PATH:/usr/local/src/racer/target/release/"
+export PATH="$PATH:$HOME/.cargo/bin"
 # Rust source on load
 source $HOME/.cargo/env
 export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
@@ -194,18 +198,27 @@ export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
 eval "$(swiftenv init -)"
 
-# Misc.
-alias gglr="googler -n5"
-alias nomouse="bin/nomouse"
-alias c="clear"
-alias t="trash"
-
-# Prevent usage of rm
-function rm() {
- echo Don\'t remove using rm! Use trash.
+# Kill a process if exists
+function killProc() {
+  if pgrep $1; then pkill $1; fi
 }
 
-alias rm=rm
+# nomouse (send to background)
+function nomouse() {
+  if pgrep nomouse
+  then
+    killProc nomouse
+    brightness 1
+  else
+    $HOME/bin/nomouse &
+  fi
+}
 
+alias nomouse=nomouse
+
+# Misc.
+alias google="googler -n5"
+alias c="clear"
+alias t="trash"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
