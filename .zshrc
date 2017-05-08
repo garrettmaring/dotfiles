@@ -1,18 +1,18 @@
 echo ".zshrc: configuring aliases, setting defaults, performing minor ritual..."
 
 # Antigen
-source $(brew --prefix)/share/antigen.zsh
+source $(brew --prefix)/share/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle pip
 antigen bundle command-not-found
 antigen bundle colorize
 antigen bundle vagrant
 antigen bundle brew
+antigen bundle lukechilds/zsh-nvm
 
 # Load the theme.
 antigen theme agnoster
@@ -130,7 +130,6 @@ alias vplugi="nvim +PluginInstall +qall"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/$TERM.ti
 tic ~/$TERM.ti
 
-
 # Things for git
 alias gs="git status"
 alias gl="git log --graph --decorate --pretty=oneline"
@@ -163,10 +162,9 @@ alias t2="tmux -2"
 alias tkill="tmux kill-session"
 
 # Things for Cassandra
+alias localcas="cqlsh 127.0.0.1 --cqlversion=3.1.7"
 alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
 alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
-#alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
-#alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra21.plist"
 
 # Things for Apple
 alias cqlitms8="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_itms8 vp21q01if-ztdi23021301.vp.if1.apple.com"
@@ -181,6 +179,7 @@ alias silverhealth=healthcheck
 # Things for local machine
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES"
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles NO"
+alias sleep="pmset sleepnow"
 
 # Things for Casa
 alias rlc="sh lib/scripts/relink_command.sh"
@@ -197,3 +196,10 @@ eval "$(swiftenv init -)"
 
 # Misc.
 alias gglr="googler -n5"
+alias nomouse="bin/nomouse"
+alias c="clear"
+alias t = "trash"
+alias rm = "echo Don't remove using rm! Use trash."
+
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

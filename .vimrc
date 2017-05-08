@@ -31,6 +31,7 @@ Plugin 'Shougo/neosnippet'
 "" Both the below plugins are needed for vim-notes
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'vimwiki/vimwiki'
 "" Dash
 Plugin 'rizzatti/dash.vim'
 call vundle#end()
@@ -41,8 +42,10 @@ let mapleader="\<Space>"
 " * load plugins relevant to filetype
 " * calculate indentation based on fileype
 filetype plugin indent on
-" Who needs it?
-set noswapfile " No .swp file
+" No .swp file
+set noswapfile 
+" no legacy vi compatibility
+set nocompatible
 " force manually configuring pasted text
 set nopaste
 " default to English spelling
@@ -185,6 +188,12 @@ au FileType gitcommit set tw=72
 " Languages {{{
 syntax enable
 
+" javascript {{{
+" replace all single quotes
+nnoremap <LEADER>"" :%s/'/"<CR>
+" delete all semicolons
+nnoremap <LEADER>;; :%s/;//<CR>
+" }}}
 " css & friends {{{
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " this fixes issues with names like vertical-align etc.
@@ -208,7 +217,7 @@ autocmd Filetype swift setlocal ts=4 sw=4 sts=0 expandtab
 " }}}
 " Languages }}}
 " Plugin Configs {{{
-" Status Line {{{
+" Status Line (lightline) {{{
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'component': {
