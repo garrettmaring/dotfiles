@@ -13,6 +13,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'itchyny/lightline.vim'
+Plugin 'itchyny/vim-gitbranch'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'benekastah/neomake'
@@ -219,14 +220,19 @@ autocmd Filetype swift setlocal ts=4 sw=4 sts=0 expandtab
 " Languages }}}
 " Plugin Configs {{{
 " Status Line (lightline) {{{
+" since lightline shows the mode, disable the default
+set noshowmode
+" configure lightline
 let g:lightline = {
-  \ 'colorscheme': 'wombat',
-  \ 'component': {
-  \   'readonly': '%{&readonly?"":""}',
-  \ },
-  \ 'separator': { 'left': "\ue0b0" },
-  \ 'subseparator': { 'left': "\ue0b1" }
-\ }
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 " }}}
 " Neosnippets {{{
 " do not run default snippets as they are not installed
