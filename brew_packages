@@ -20,3 +20,14 @@ swiftlint
 sourcekitten
 trash
 brightness
+
+_MACHINE LEARNING_
+snappy
+leveldb
+gflags
+glog
+szip
+lmdb
+install
+protobuf
+boost

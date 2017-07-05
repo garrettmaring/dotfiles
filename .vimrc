@@ -28,6 +28,7 @@ Plugin 'mitsuse/autocomplete-swift'
 Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'Shougo/neosnippet'
+Plugin 'leafgarland/typescript-vim'
 "" Both the below plugins are needed for vim-notes
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
@@ -260,7 +261,7 @@ nnoremap <Leader>d :Dash<CR>
 " }}}
 " NerdTree {{{
 " open nerdTree when vim open
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 " open nerdTre even if no files specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -268,7 +269,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " move to file buffer if file present
-autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | endif
+"autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | endif
 " close nerdTree if it's the only buffer left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 

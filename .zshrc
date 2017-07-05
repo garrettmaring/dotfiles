@@ -66,6 +66,16 @@ function z () {
   cd $(ds | fzf)
 }
 
+# fzf
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fe() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
 # Things for the shell
 
 # Rust
@@ -77,26 +87,10 @@ source $HOME/.cargo/env
 export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
 export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
 
-#####################
-## ZSH force alias ##
-#zle -N expand-aliases; bindkey '^E' expand-aliases
-#(force-alias-server > /dev/null &) > /dev/null 2>&1
-#if [[ -z "$NO_CHECK" ]]; then force-alias-client --init --pid $$; fi
-#function force_alias_hook() {
-  #if [[ -n "$NO_CHECK" ]]; then zle accept-line; return; fi
-  #force-alias-client --pid $$ -- $BUFFER
-  #if [[ $? -eq 1 ]]; then BUFFER=""; fi
-  #zle accept-line
-#}
-#autoload -U add-zsh-hook; zle -N force_alias_hook;
-#bindkey '^J' force_alias_hook; bindkey '^M' force_alias_hook;
-## End ZSH force alias ##
-#########################
-
 findAlias() {
   alias | grep $1
 }
-alias findali=findAlias
+alias fali=findAlias
 alias aali="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias la="ls -la"
@@ -143,6 +137,7 @@ alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force"
 # Get path of root directory in git repo
 alias groot="git rev-parse --show-toplevel"
+alias git="hub"
 
 # Things for NPM/Node
 alias nis="npm install --save"
