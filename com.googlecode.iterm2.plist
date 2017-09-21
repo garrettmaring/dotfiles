@@ -285,6 +285,8 @@
 	<integer>0</integer>
 	<key>HotkeyCode</key>
 	<integer>0</integer>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>HotkeyModifiers</key>
 	<integer>0</integer>
 	<key>IRMemory</key>
@@ -350,13 +352,13 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>4688 404 606 456 4000 -540 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 375 620 392 0 0 1440 877 </string>
+	<string>410 380 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1962 69 796 473 1440 -353 2560 1417 </string>
+	<string>223 241 918 512 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -339 2558 1403 1440 -353 2560 1417 </string>
+	<string>1440 -330 2560 1394 1440 -353 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2322 -353 1410 1417 1440 -353 2560 1417 </string>
+	<string>23 66 1410 811 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>4000 -339 2558 1403 4000 -353 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -1239,13 +1241,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-04-13T19:21:19Z</date>
+	<date>2017-09-11T22:56:34Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -1291,6 +1293,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.15</string>
+	<string>3.1.beta.8</string>
 </dict>
 </plist>
