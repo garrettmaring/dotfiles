@@ -36,6 +36,11 @@ Plugin 'xolox/vim-notes'
 Plugin 'vimwiki/vimwiki'
 "" Dash
 Plugin 'rizzatti/dash.vim'
+"" Prose
+Plugin 'junegunn/goyo.vim' " Minimalist editor view
+Plugin 'reedes/vim-pencil' " Undo points, soft line wraps, general writing tools
+Plugin 'reedes/vim-lexical' " Spell-check and thesaurus
+Plugin 'reedes/vim-wordy' " Enforce writing best practices
 call vundle#end()
 " }}}
 " Core {{{
