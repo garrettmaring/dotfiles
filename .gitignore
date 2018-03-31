@@ -1,1 +1,4 @@
 .DS_Store
+
+nvim.log
+nvim.log_py3_rplugin

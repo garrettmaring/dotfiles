@@ -183,12 +183,20 @@ alias sleep="pmset sleepnow"
 # Things for Casa
 alias rlc="sh lib/scripts/relink_command.sh"
 
+
+# Things for Python
+#alias python="python3"
+#alias pip="pip3"
+export PATH="/Users/garrettmaring/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # Things for Swift
 alias sb="swift build"
 alias sbc="swift build --clean"
+if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
-eval "$(swiftenv init -)"
 
 # Kill a process if exists
 function killProc() {
@@ -214,3 +222,6 @@ alias c="clear"
 alias t="trash"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"

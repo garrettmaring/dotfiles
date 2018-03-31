@@ -1,5 +1,6 @@
 " Garrett Maring
 " Plugins {{{
+set nocompatible " Required for Vundle
 filetype off " Required for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim " Set runtime path
 
@@ -10,6 +11,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'lambdalisue/gina.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'itchyny/lightline.vim'
@@ -274,8 +276,8 @@ nnoremap <Leader>d :Dash<CR>
 " open nerdTree when vim open
 "autocmd vimenter * NERDTree
 " open nerdTre even if no files specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " open nerdTree if opening a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -300,7 +302,10 @@ let g:neomake_list_height = 8
 " bash
 let g:neomake_sh_enabled_makers = ['shellcheck']
 " rust
-let g:neomake_rust_enabled_makers = ['rustc']
+let g:neomake_rust_enabled_makers = []
+let g:neomake_enabled_makers = ['cargo']
+let g:neomake_cargo_args = ['check']
+autocmd! BufWritePost, *.rs Neomake! cargo
 " javascript
 " load local eslint in the project root
 " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
@@ -346,6 +351,18 @@ au filetype javascript nnoremap <leader>doc :TernDoc<CR>
 " }}}
 " vim-jsx {{{
 let g:jsx_ext_required = 0
+" }}}
+" Gina {{{
+" gina-done: Used for review flow. Add stage the current file and return the
+" status
+function AddStatus()
+  :Gina add %
+  :Gina status
+endfunction
+noremap <Leader>gd :call AddStatus()<CR>
+
+" Vertifical git diff
+set diffopt=filler,vertical
 " }}}
 " Plugin Configs }}}
 " Misc {{{

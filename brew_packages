@@ -20,8 +20,6 @@ swiftlint
 sourcekitten
 trash
 brightness
-
-_MACHINE LEARNING_
 snappy
 leveldb
 gflags
@@ -31,3 +29,5 @@ lmdb
 install
 protobuf
 boost
+kylef/formulae/swiftenv
+hub

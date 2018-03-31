@@ -1,12 +1,11 @@
 #!/bin/bash
 
 cat << Header
-
 /*===============================================
 =            Initializing Hyperdrive            =
 ===============================================*/
 
-"Not all those who wander are lost." - Bilbo Baggins
+"Not all those who wander are lost." - J.R.R. Tolkein
 
 Header
 sleep 1
@@ -31,7 +30,8 @@ fi
 ## Installing brew packages, gems, node modules, and python packages
 printf "\n/*----------  Installing all packages  ----------*/\n"
 printf "\nBrew packages: \n"
-cat ./brew_packages | sudo -u $NAME xargs brew install # Shouldn't run brew install with sudo permissions
+cat ./brew_packages | sudo -u $NAME xargs -n 1 brew install # Shouldn't run brew install with sudo permissions
+exit 0
 printf "\nRuby gems: \n"
 cat ./gems | xargs gem install
 printf "\nNode modules: \n"
@@ -71,9 +71,28 @@ sudo -u $NAME chsh -s $(which zsh)
 cd
 sudo -u $NAME  git clone https://github.com/powerline/fonts.git
 ./fonts/install.sh
+# NOTE: There is also a change in iTerm preferences which is required.
+
+# Another note: To get some neovim/python things working we need to use pyenv (can use venv?) 
+# https://github.com/pyenv/pyenv-installer
 
 cat << Footer
 
 /*=====  All done. Taking Hyperdrive offline. Please restart your terminal!  ======*/
 
 Footer
+
+# Somethings for pyenv/neovim/deoplete
+#pyenv install 2.7.11
+#pyenv install 3.4.4
+
+#pyenv virtualenv 2.7.11 neovim2
+#pyenv virtualenv 3.4.4 neovim3
+
+#pyenv activate neovim2
+#pip install neovim
+#pyenv which python  # Note the path
+
+#pyenv activate neovim3
+#pip install neovim
+#pyenv which python  # Note the path
