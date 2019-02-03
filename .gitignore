@@ -2,3 +2,5 @@
 
 nvim.log
 nvim.log_py3_rplugin
+
+.python-version/

@@ -1,4 +1,4 @@
-" Garrett Maring
+ " GarrettMaring
 " Plugins {{{
 set nocompatible " Required for Vundle
 filetype off " Required for Vundle
@@ -8,18 +8,18 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-abolish' " Advanced search and replace
 Plugin 'tpope/vim-surround'
+Plugin 'wellle/targets.vim' " Provide better text object manipulation
 Plugin 'scrooloose/nerdTree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'lambdalisue/gina.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'posva/vim-vue' " Vue syntax highlighting
 Plugin 'itchyny/lightline.vim'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'benekastah/neomake'
-Plugin 'Shougo/deoplete.nvim'
+Plugin 'w0rp/ale' " Linting & language server
 Plugin 'ternjs/tern_for_vim'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -28,7 +28,6 @@ Plugin 'racer-rust/vim-racer' " Rust autocomplete
 Plugin 'wikitopian/hardmode'
 Plugin 'keith/swift.vim' " Swift syntax
 Plugin 'mitsuse/autocomplete-swift'
-Plugin 'craigemery/vim-autotag'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'Shougo/neosnippet'
 Plugin 'leafgarland/typescript-vim'
@@ -38,40 +37,13 @@ Plugin 'xolox/vim-notes'
 Plugin 'vimwiki/vimwiki'
 "" Dash
 Plugin 'rizzatti/dash.vim'
+Plugin 'jeetsukumaran/vim-indentwise'
 "" Prose
 Plugin 'junegunn/goyo.vim' " Minimalist editor view
 Plugin 'reedes/vim-pencil' " Undo points, soft line wraps, general writing tools
 Plugin 'reedes/vim-lexical' " Spell-check and thesaurus
 Plugin 'reedes/vim-wordy' " Enforce writing best practices
 call vundle#end()
-" }}}
-" Core {{{
-let mapleader="\<Space>"
-" enable filetype detection and: 
-" * load plugins relevant to filetype
-" * calculate indentation based on fileype
-filetype plugin indent on
-" No .swp file
-set noswapfile 
-" no legacy vi compatibility
-set nocompatible
-" force manually configuring pasted text
-set nopaste
-" default to English spelling
-set spelllang=en_us
-
-" esc
-inoremap jk <ESC>
-" write
-noremap <LEADER>w <ESC> :w<CR>
-" quit
-noremap <LEADER>q <ESC> :q<CR>
-" quit all
-noremap <LEADER>qq <ESC> :qa<CR>
-" write and quit
-inoremap <LEADER>wq <ESC> :wq<CR>
-" load .vimrc
-noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
 " }}}
 " Colors {{{
 color smyck
@@ -100,6 +72,41 @@ set guioptions-=l
 " disable right scrollbar
 set guioptions-=r
 " }}}
+" Core {{{
+let mapleader="\<Space>"
+" enable filetype detection and: 
+" * load plugins relevant to filetype
+" * calculate indentation based on fileype
+filetype plugin indent on
+" No .swp file
+set noswapfile 
+" no legacy vi compatibility
+set nocompatible
+" force manually configuring pasted text
+set nopaste
+" default to English spelling
+set spelllang=en_us
+
+" esc
+inoremap <LEADER>jk <ESC>
+" write
+noremap <LEADER>w <ESC> :w<CR>
+" quit
+noremap <LEADER>q <ESC> :q<CR>
+" quit all
+noremap <LEADER>qq <ESC> :qa<CR>
+" write and quit
+inoremap <LEADER>wq <ESC> :wq<CR>
+" load .vimrc
+noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
+" }}}
+" Editing {{{
+inoremap <LEADER>pp <C-R>"
+" <C-O> runs a normal mode command in insert mode
+inoremap <LEADER>dd <C-O>dd
+" Replace remaing words on the line as you just did
+map <Leader>rm :s/<C-r>-/<C-r>.<CR>
+" }}}
 " Mouse & Keyboard {{{
 " backspace works as expected
 set backspace=indent,eol,start
@@ -107,12 +114,6 @@ set backspace=indent,eol,start
 set mouse=a
 " }}}
 " Movement {{{
-" jump to beginning/end of code block
-noremap <LEADER>[ [{
-noremap <LEADER>] ]}
-" jump to beginning/end of parens
-noremap <LEADER>( [(
-noremap <LEADER>) ])
 " }}}
 " Tabs & Spaces {{{
 " copies indentation of current line when entering a new line with 'O'
@@ -148,6 +149,9 @@ noremap <LEADER>%% V$%
 vnoremap <LEADER>%% $%
 " copy to system clipboard
 vnoremap <LEADER>C :w !pbcopy<CR>
+
+" bring up fuzzy line searching
+nnoremap <LEADER>s :Ag<CR>
 " }}}
 " Folding {{{
 set foldenable
@@ -197,14 +201,20 @@ au FileType gitcommit set tw=72
 " Languages {{{
 syntax enable
 
-" javascript {{{
+" javascript & typescript {{{
 " replace all single quotes
 nnoremap <LEADER>"" :%s/'/"<CR>
 " delete all semicolons
 nnoremap <LEADER>;; :%s/;//<CR>
+" Put this in vimrc or a plugin file of your own.
+" After this is configured, :ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\}
 " }}}
 " css & friends {{{
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " this fixes issues with names like vertical-align etc.
 augroup VimCSS3Syntax
   autocmd!
@@ -212,8 +222,8 @@ augroup VimCSS3Syntax
 augroup END
 
 " scss
-au BufRead,BufNewFile *.scss set filetype=scss.css
-au FileType scss setlocal omnifunc=csscomplete#CompleteCSS
+" au BufRead,BufNewFile *.scss set filetype=scss.css
+" au FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 " }}}
 " rust {{{
 let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
@@ -221,7 +231,6 @@ let $RUST_SRC_PATH="/usr/local/src/rust/src"
 " }}}
 " swift {{{
 " build on every write
-autocmd! BufWritePost *.swift :NeomakeSh swift build
 autocmd Filetype swift setlocal ts=4 sw=4 sts=0 expandtab
 " }}}
 " Languages }}}
@@ -290,54 +299,37 @@ map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 " }}}
-" Neomake {{{
-" check files after every write and read
-autocmd! BufWritePost * Neomake
-autocmd! BufReadPost * Neomake
-" open list when entries added. value 2 preserves cursor location
-let g:neomake_open_list = 2
-" set location list height
-let g:neomake_list_height = 8
+" Ale {{{
+let g:ale_completion_enabled = 1
 
-" bash
-let g:neomake_sh_enabled_makers = ['shellcheck']
-" rust
-let g:neomake_rust_enabled_makers = []
-let g:neomake_enabled_makers = ['cargo']
-let g:neomake_cargo_args = ['check']
-autocmd! BufWritePost, *.rs Neomake! cargo
-" javascript
-" load local eslint in the project root
-" modified from https://github.com/mtscout6/syntastic-local-eslint.vim
-let g:neomake_javascript_enabled_makers = ['eslint']
-let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-" swift
-let g:neomake_swift_enabled_makers = ['swiftlint']
-let g:neomake_swift_swiftlint_maker = {
-      \ 'args': ['lint', '--config', './.swiftlint.yml', '--quiet'],
-      \ 'errorformat': '%f:%l:%c: %trror: %m,%f:%l:%c: %tarning: %m,%f:%l: %tarning: %m,%f:%l: %trror: %m',
-      \ 'append_file': 0,
-      \ }
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+nmap <Leader>ar :ALEFindReferences<CR>
+nmap <Leader>ad :ALEGoToDefinition<CR>
+" }}}
+" IndentWise {{{
+map <C-u> <Plug>(IndentWisePreviousEqualIndent)
+map <C-y> <Plug>(IndentWiseNextEqualIndent)
+map <C-o> <Plug>(IndentWisePreviousLesserIndent)
+map <C-i> <Plug>(IndentWiseNextGreaterIndent)
+" Defaults
+map [+ <Plug>(IndentWisePreviousGreaterIndent)
+map ]- <Plug>(IndentWiseNextLesserIndent)
+map [_ <Plug>(IndentWisePreviousAbsoluteIndent)
+map ]_ <Plug>(IndentWiseNextAbsoluteIndent)
+map [% <Plug>(IndentWiseBlockScopeBoundaryBegin)
+map ]% <Plug>(IndentWiseBlockScopeBoundaryEnd)
+" }}}
+
+" https://github.com/posva/vim-vue#my-syntax-highlighting-stops-working-randomly
+autocmd FileType vue syntax sync fromstart
 
 nmap <Leader>lo :lopen<CR>
 nmap <Leader>lc :lclose<CR>
-nmap <Leader>ll :ll<CR>
+nmap <Leader>ll :lnext<CR>
 nmap <Leader>ln :lnext<CR>
 nmap <Leader>lp :lprev<CR>
-" }}}
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-" if there aren't input patterns set for completion, set it to {}
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-  " only trigger autocomplete after 
-  let g:deoplete#omni#input_patterns.javascript = ['[^. *\t]\.\w*']
-  let g:deoplete#omni#input_patterns.swift = ['[^. *\t]\.\w*']
-endif
-" when autocomplete menu is showing, tab through options
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" }}}
 " Notes {{{
 let g:notes_directories = ['~/Notes' ]
 let g:notes_suffix = '.txt'
@@ -366,6 +358,8 @@ set diffopt=filler,vertical
 " }}}
 " Plugin Configs }}}
 " Misc {{{
+
+map <Leader>for :%!python -m json.tool<CR>
 " add support for local .vimrc configurations
 
 " Search for a local.vim file
@@ -379,3 +373,8 @@ endtry
 
 " local .vimrc file. See http://vimdoc.sourceforge.net/htmldoc/options.html#'secure'
 " }}}
+"
+" This is to get tab complete with Ale
+" yeah, so inoremap just maps a command in insert mode, while disallowing using mappings for the right hand side (otherwise the tab thing would be recursive). <expr> means instead of inserting whatever follows, we’re telling vim that it’s an expression to be evaluated. <silent> I’m unsure of, not sure what happens if we don’t specify that, maybe it shows the expression in the status bar or something. After that it’s just a ternary operator; if pumvisible (“Returns non-zero when the popup menu is visible”), then send Ctrl-N, which  will tell omnicomplete to go forward one (could have also used arrow down here), otherwise just send a tab
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"

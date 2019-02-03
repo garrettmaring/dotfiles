@@ -1,4 +1,4 @@
-echo ".zshrc: configuring aliases, setting defaults, performing minor ritual..."
+# echo "Performing minor ritual: Loading plugins, configuring shell, initializing environment managers..."
 
 # Antigen
 source $(brew --prefix)/share/antigen/antigen.zsh
@@ -7,7 +7,7 @@ source $(brew --prefix)/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle pip
+# antigen bundle pip
 antigen bundle command-not-found
 antigen bundle colorize
 antigen bundle vagrant
@@ -26,10 +26,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 # Global configs
-export EDITOR=vim
 
 # Add user bin to path
-export PATH="$PATH:$HOME/bin"
 
 # Zsh vim mode
 bindkey -v
@@ -56,7 +54,6 @@ zle-line-init() {
 zle -N zle-keymap-select
 zle -N zle-line-init
 # Reduce the time zsh takes to check for special characters
-export KEYTIMEOUT=1
 
 # Fasd
 eval "$(fasd --init auto)"
@@ -79,13 +76,8 @@ vf() {
 # Things for the shell
 
 # Rust
-export RUST_SRC_PATH="/usr/local/src/rust/src"
-export PATH="$PATH:/usr/local/src/racer/target/release/"
-export PATH="$PATH:$HOME/.cargo/bin"
 # Rust source on load
 source $HOME/.cargo/env
-export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
-export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
 
 findAlias() {
   alias | grep $1
@@ -137,7 +129,6 @@ alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force"
 # Get path of root directory in git repo
 alias groot="git rev-parse --show-toplevel"
-alias git="hub"
 
 # Things for NPM/Node
 alias nis="npm install --save"
@@ -150,10 +141,8 @@ alias nr="npm run"
 alias nf="npm cache clean && rm -rf node_modules && npm install"
 
 # Things for Javascript
-export PATH="$PATH:`yarn global bin`"
 
 # Things for Java
-export JAVA_HOME=$(/usr/libexec/java_home)
 
 # Thing for tmux
 alias ttmux="nvim ~/.tmux.conf"
@@ -165,16 +154,6 @@ alias localcas="cqlsh 127.0.0.1 --cqlversion=3.1.7"
 alias startcas="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
 alias stopcas="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist"
 
-# Things for Apple
-alias cqlitms8="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_itms8 vp21q01if-ztdi23021301.vp.if1.apple.com"
-alias cqldev2="/usr/local/Cellar/cassandra20/2.0.11/bin/cqlsh -k mozart_dev2 vp21q01if-ztdi23021301.vp.if1.apple.com"
-alias moz="cd ~/Projects/mozartui && v package.json"
-
-healthcheck() {
-  curl "https://silverbullet-admin-itms$1.itunes.apple.com/healthcheck"
-}
-alias silverhealth=healthcheck
-
 # Things for local machine
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES"
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles NO"
@@ -183,20 +162,20 @@ alias sleep="pmset sleepnow"
 # Things for Casa
 alias rlc="sh lib/scripts/relink_command.sh"
 
-
 # Things for Python
 #alias python="python3"
 #alias pip="pip3"
-export PATH="/Users/garrettmaring/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if hash pyenv 2>/dev/null; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # Things for Swift
 alias sb="swift build"
 alias sbc="swift build --clean"
-if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
-export SWIFTENV_ROOT="$HOME/.swiftenv"
-export PATH="$SWIFTENV_ROOT/bin:$PATH"
+if hash swiftenv 2>/dev/null; then
+  eval "$(swiftenv init -)";
+fi
 
 # Kill a process if exists
 function killProc() {
@@ -220,8 +199,4 @@ alias nomouse=nomouse
 alias google="googler -n5"
 alias c="clear"
 alias t="trash"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
+alias uuid="python -c 'import sys,uuid; sys.stdout.write(str(uuid.uuid4()).upper());sys.stdout.write(\"\n\")'"
