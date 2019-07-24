@@ -289,6 +289,7 @@ nnoremap <Leader>d :Dash<CR>
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " open nerdTree if opening a directory
 autocmd StdinReadPre * let s:std_in=1
+let g:loaded_nerdtree_exec_menuitem=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " move to file buffer if file present
 "autocmd VimEnter * if argc() == 1 | NERDTree | wincmd p | endif
@@ -378,3 +379,6 @@ endtry
 " yeah, so inoremap just maps a command in insert mode, while disallowing using mappings for the right hand side (otherwise the tab thing would be recursive). <expr> means instead of inserting whatever follows, we’re telling vim that it’s an expression to be evaluated. <silent> I’m unsure of, not sure what happens if we don’t specify that, maybe it shows the expression in the status bar or something. After that it’s just a ternary operator; if pumvisible (“Returns non-zero when the popup menu is visible”), then send Ctrl-N, which  will tell omnicomplete to go forward one (could have also used arrow down here), otherwise just send a tab
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
+" The same as above but use shift-tab to select previous
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" : "\<S-TAB>"

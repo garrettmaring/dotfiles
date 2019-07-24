@@ -1,9 +1,11 @@
 [user]
 	name = Garrett
-	email = garrett@air.cam
+	email = garrett.maring@kernel.co
 [colorl]
 	ui = auto
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[http]
+	sslVerify = false

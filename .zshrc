@@ -200,3 +200,10 @@ alias google="googler -n5"
 alias c="clear"
 alias t="trash"
 alias uuid="python -c 'import sys,uuid; sys.stdout.write(str(uuid.uuid4()).upper());sys.stdout.write(\"\n\")'"
+ 
+# ruby
+eval "$(rbenv init -)"
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/garrettmaring/.npm/_npx/3430/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/garrettmaring/.npm/_npx/3430/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
