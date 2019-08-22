@@ -16,3 +16,5 @@
 * `defaults write com.apple.finder AppleShowAllFiles YES`
 * tmux breaks with 2.9a with my config: install
 * need reattach-to-user-namespace brew package installed
+* *sudo sysctl -w net.inet.udp.maxdgram=65535
+* brew install git-lfs

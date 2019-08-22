@@ -72,6 +72,17 @@ set guioptions-=l
 " disable right scrollbar
 set guioptions-=r
 " }}}
+" Splits {{{
+set splitbelow
+set splitright
+
+" right movement
+noremap <C-K> <C-W>l
+" left movement
+noremap <C-J> <C-W>h
+" easier vertical split
+noremap <C-s> :vsp<CR>
+" }}}
 " Core {{{
 let mapleader="\<Space>"
 " enable filetype detection and: 
@@ -380,5 +391,5 @@ endtry
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
 " The same as above but use shift-tab to select previous
-inoremap <silent><expr> <S-Tab>
-      \ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+"inoremap <silent><expr> <S-Tab>
+      "\ pumvisible() ? "\<C-p>" : "\<S-TAB>"

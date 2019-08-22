@@ -163,8 +163,8 @@ alias sleep="pmset sleepnow"
 alias rlc="sh lib/scripts/relink_command.sh"
 
 # Things for Python
-#alias python="python3"
-#alias pip="pip3"
+alias python="python3"
+alias pip="pip3"
 if hash pyenv 2>/dev/null; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
@@ -176,6 +176,13 @@ alias sbc="swift build --clean"
 if hash swiftenv 2>/dev/null; then
   eval "$(swiftenv init -)";
 fi
+alias ne=newEnv # new environment
+alias ps="pip install -e ." # python setup
+alias pr="pip install -r requirements.txt" # python requirements
+
+function newEnv() {
+  virtualenv .$1 && . .$1/bin/activate
+}
 
 # Kill a process if exists
 function killProc() {
