@@ -3,9 +3,12 @@
 	email = garrett.maring@kernel.co
 [colorl]
 	ui = auto
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
 [http]
 	sslVerify = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+  revert-file = !sh ~/Code/dotfiles/scripts/gitFileRevert.sh

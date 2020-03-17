@@ -1,29 +1,32 @@
 # echo "Performing minor ritual: Loading plugins, configuring shell, initializing environment managers..."
 
-# Antigen
-source $(brew --prefix)/share/antigen/antigen.zsh
+# Zgen
+source "${HOME}/.zgen/zgen.zsh"
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+# if the init script doesn't exist
+if ! zgen saved; then
 
-antigen bundle git
-# antigen bundle pip
-antigen bundle command-not-found
-antigen bundle colorize
-antigen bundle vagrant
-antigen bundle brew
-antigen bundle lukechilds/zsh-nvm
+  # specify plugins here
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/vi-mode
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/sudo
+  zgen oh-my-zsh plugins/command-not-found
+  zgen load zsh-users/zsh-completions src
+  #zgen bundle colorize
 
-# Load the theme.
-antigen theme agnoster 
+  ## Load the theme.
+  zgen load denysdovhan/spaceship-prompt spaceship
 
-# Tell antigen that you're done.
-antigen apply
+  # generate the init script from plugins above
+  zgen save
+fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+
 
 # Global configs
 
@@ -78,6 +81,7 @@ vf() {
 # Rust
 # Rust source on load
 source $HOME/.cargo/env
+export RUST_SRC_PATH=~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src
 
 findAlias() {
   alias | grep $1
@@ -94,12 +98,6 @@ mkCd() {
 }
 alias mkcd=mkCd
 # }}}
-# Create a new note in the current directory with vim-note {{{
-newVimNote() {
-  v note:$1
-}
-alias vn=newVimNote
-# }}}
 # }}}
 # Scripts {{{
 alias ffws="findFilesWithString"
@@ -115,20 +113,23 @@ alias whereserver=findPort
 # Things for Vim
 alias v="nvim"
 alias vvim="nvim ~/.vimrc"
-alias vplugi="nvim +PluginInstall +qall"
+alias vplugi="nvim +PlugInstall"
 # Making ctrl-h work in neovim
-infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/$TERM.ti
-tic ~/$TERM.ti
+#infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/$TERM.ti
+#tic ~/$TERM.ti
 
 # Things for git
 alias gs="git status"
 alias gl="git log --graph --decorate --pretty=oneline"
+alias glm="git log --graph --decorate --pretty=oneline --author=Garrett"
 alias gaa="git add ."
 alias gcan="git commit --amend --no-edit"
+alias ghom="git pull origin master"
 alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force"
 # Get path of root directory in git repo
 alias groot="git rev-parse --show-toplevel"
+alias gsquash="bash ~/Code/scripts/squash-commits.sh"
 
 # Things for NPM/Node
 alias nis="npm install --save"
@@ -139,8 +140,11 @@ alias nit="npm install && npm test"
 alias nk="npm link"
 alias nr="npm run"
 alias nf="npm cache clean && rm -rf node_modules && npm install"
+export NODE_OPTIONS='--max-old-space-size=8192' # 8gb
+export PATH="/usr/local/Cellar/node/12.6.0/bin:$PATH" 
 
-# Things for Javascript
+# Things for Javascripts
+alias lb="lerna bootstrap"
 
 # Things for Java
 
@@ -148,6 +152,8 @@ alias nf="npm cache clean && rm -rf node_modules && npm install"
 alias ttmux="nvim ~/.tmux.conf"
 alias t2="tmux -2"
 alias tkill="tmux kill-session"
+#source ~/.bin/tmuxinator.zsh # load tmuxinator
+alias kernel="tmuxinator start kernel"
 
 # Things for Cassandra
 alias localcas="cqlsh 127.0.0.1 --cqlversion=3.1.7"
@@ -170,19 +176,20 @@ if hash pyenv 2>/dev/null; then
   eval "$(pyenv virtualenv-init -)"
 fi
 
+function newEnv() {
+  virtualenv .$1 && . .$1/bin/activate
+}
+
+alias ne=newEnv # new environment
+alias ps="pip install -e ." # python setup
+alias pr="pip install -r requirements.txt" # python requirements
+
 # Things for Swift
 alias sb="swift build"
 alias sbc="swift build --clean"
 if hash swiftenv 2>/dev/null; then
   eval "$(swiftenv init -)";
 fi
-alias ne=newEnv # new environment
-alias ps="pip install -e ." # python setup
-alias pr="pip install -r requirements.txt" # python requirements
-
-function newEnv() {
-  virtualenv .$1 && . .$1/bin/activate
-}
 
 # Kill a process if exists
 function killProc() {
@@ -214,3 +221,37 @@ eval "$(rbenv init -)"
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/garrettmaring/.npm/_npx/3430/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/garrettmaring/.npm/_npx/3430/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+nightlypack() {
+  echo "Using nightly toolchain..."
+  rustup run nightly $HOME/.cargo/bin/wasm-pack "$@"
+}
+
+alias wasm-pack=nightlypack
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Spaceship Theme
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  docker        # Docker section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

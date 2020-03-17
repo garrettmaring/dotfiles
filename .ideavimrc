@@ -1,78 +1,35 @@
-" Garrett Maring
-" Core {{{
-let mapleader="\<Space>"
-" enable filetype detection and: 
-" * load plugins relevant to filetype
-" * calculate indentation based on fileype
-filetype plugin indent on
-" No .swp file
-set noswapfile 
-" no legacy vi compatibility
-set nocompatible
-" force manually configuring pasted text
-set nopaste
-" default to English spelling
-set spelllang=en_us
+" https://github.com/JetBrains/ideavim
+source ~/.vimrc
 
-" esc
-inoremap jk <ESC>
-" write
-noremap <LEADER>w <ESC> :w<CR>
-" quit
-noremap <LEADER>q <ESC> :q<CR>
-" quit all
-noremap <LEADER>qq <ESC> :qa<CR>
-" write and quit
-inoremap <LEADER>wq <ESC> :wq<CR>
-" load .vimrc
-noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
-" }}}
-" Mouse & Keyboard {{{
-" backspace works as expected
-set backspace=indent,eol,start
-" enable mouse in all modes
-set mouse=a
-" }}}
-" Movement {{{
-" jump to beginning/end of code block
-noremap <LEADER>[ [{
-noremap <LEADER>] ]}
-" jump to beginning/end of parens
-noremap <LEADER>( [(
-noremap <LEADER>) ])
-" }}}
-" Tabs & Spaces {{{
-" copies indentation of current line when entering a new line with 'O'
-set autoindent
-" tab key inserts spaces instead of tab character
-set expandtab
-" indents conform to edited tab settings
-set smarttab
-set softtabstop=0
-" width of an indent in space
-set shiftwidth=2
-" width of a hardtabstop in spaces
-set tabstop=2
-" }}}
-" Search & Select {{{
-" system clipboard support
-set clipboard=unnamed
-" search as characters are entered
-set incsearch
-" default to ignore case
-set ignorecase
-" will not ignore case if capital characters are entered
-set smartcase
-" highlight search
-set hlsearch
-" substiture with /g by default
-set gdefault
+"let mapleader = " "
+"imap <leader>jk <Esc>
 
-" turn off search highlight
-nnoremap <LEADER>nh :noh<CR>
-" highlight everything inside block (inclusive)
-noremap <LEADER>%% V$%
-vnoremap <LEADER>%% $%
-" copy to system clipboard
-vnoremap <LEADER>C :w !pbcopy<CR>
-" }}}
+set surround
+set multiple-cursors
+set commentary
+
+map \r :action ReformatCode<CR>
+map <leader>a :action $SelectAll<CR>
+map <leader>b :action GotoDeclaration<CR>
+map <leader>c :action $Copy<CR>
+map <leader>d :action EditorDuplicate<CR>
+map <leader>e :action RecentFiles<CR>
+map <leader>f :action Find<CR>
+map <leader>g :action GotoLine<CR>
+map <leader>h :action TypeHierarchy<CR>
+map <leader>i :action ImplementMethods<CR>
+map <leader>m :action EditorScrollToCenter<CR>
+map <leader>n :action FileChooser.NewFolder<CR>
+map <leader>o :action OverrideMethods<CR>
+map <leader>p :action ParameterInfo<CR>
+map <leader>q :action QuickJavaDoc<CR>
+map <leader>r :action Replace<CR>
+map <leader>s :action SaveAll<CR>
+map <leader>t :action Vcs.UpdateProject<CR>
+map <leader>u :action GotoSuperMethod<CR>
+map <leader>v :action $Paste<CR>
+map <leader>w :action EditorSelectWord<CR>
+map <leader>x :action $Cut<CR>
+map <leader>y :action EditorDeleteLine<CR>
+map <leader>[ :action EditorCodeBlockStart<CR>
+map <leader>] :action EditorCodeBlockEnd<CR>

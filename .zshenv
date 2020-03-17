@@ -9,7 +9,8 @@ export PS1="[%* - %D] %d %% "
 export KEYTIMEOUT=1
 
 # core
-export EDITOR=vim
+export EDITOR=nvim
+export MYVIMRC="$HOME/.vimrc"
 append_to_path "$HOME/bin" 
 append_to_path "/usr/local/bin" 
 

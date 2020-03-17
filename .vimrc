@@ -1,52 +1,61 @@
  " GarrettMaring
+ 
 " Plugins {{{
-set nocompatible " Required for Vundle
-filetype off " Required for Vundle
-set rtp+=~/.vim/bundle/Vundle.vim " Set runtime path
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-abolish' " Advanced search and replace
-Plugin 'tpope/vim-surround'
-Plugin 'wellle/targets.vim' " Provide better text object manipulation
-Plugin 'scrooloose/nerdTree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'lambdalisue/gina.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'posva/vim-vue' " Vue syntax highlighting
-Plugin 'itchyny/lightline.vim'
-Plugin 'itchyny/vim-gitbranch'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'w0rp/ale' " Linting & language server
-Plugin 'ternjs/tern_for_vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer' " Rust autocomplete
-Plugin 'wikitopian/hardmode'
-Plugin 'keith/swift.vim' " Swift syntax
-Plugin 'mitsuse/autocomplete-swift'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'Shougo/neosnippet'
-Plugin 'leafgarland/typescript-vim'
+call plug#begin('~/.vim/plugged')
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
+Plug 'tpope/vim-abolish' " Advanced search and replace
+Plug 'tpope/vim-surround'
+Plug 'wellle/targets.vim' " Provide better text object manipulation
+Plug 'scrooloose/nerdTree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'lambdalisue/gina.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue' " Vue syntax highlighting
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale' " Linting & language server
+Plug 'ternjs/tern_for_vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'racer-rust/vim-racer' " Rust autocomplete
+Plug 'rust-lang/rust.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'takac/vim-hardtime'
+Plug 'keith/swift.vim' " Swift syntax
+Plug 'mitsuse/autocomplete-swift'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'Shougo/neosnippet'
+Plug 'leafgarland/typescript-vim'
 "" Both the below plugins are needed for vim-notes
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'vimwiki/vimwiki'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'vimwiki/vimwiki'
 "" Dash
-Plugin 'rizzatti/dash.vim'
-Plugin 'jeetsukumaran/vim-indentwise'
+Plug 'rizzatti/dash.vim'
+Plug 'jeetsukumaran/vim-indentwise'
 "" Prose
-Plugin 'junegunn/goyo.vim' " Minimalist editor view
-Plugin 'reedes/vim-pencil' " Undo points, soft line wraps, general writing tools
-Plugin 'reedes/vim-lexical' " Spell-check and thesaurus
-Plugin 'reedes/vim-wordy' " Enforce writing best practices
-call vundle#end()
+Plug 'junegunn/goyo.vim' " Minimalist editor view
+Plug 'reedes/vim-pencil' " Undo points, soft line wraps, general writing tools
+Plug 'reedes/vim-lexical' " Spell-check and thesaurus
+Plug 'reedes/vim-wordy' " Enforce writing best practices
+Plug 'leafOfTree/vim-svelte-plugin' 
+call plug#end()
 " }}}
 " Colors {{{
-color smyck
+color apprentice
 
 autocmd ColorScheme * highlight Comment ctermfg=Red
 autocmd ColorScheme * highlight Folded ctermfg=Green cterm=NONE ctermbg=NONE
@@ -72,19 +81,8 @@ set guioptions-=l
 " disable right scrollbar
 set guioptions-=r
 " }}}
-" Splits {{{
-set splitbelow
-set splitright
-
-" right movement
-noremap <C-K> <C-W>l
-" left movement
-noremap <C-J> <C-W>h
-" easier vertical split
-noremap <C-s> :vsp<CR>
-" }}}
 " Core {{{
-let mapleader="\<Space>"
+let mapleader=" "
 " enable filetype detection and: 
 " * load plugins relevant to filetype
 " * calculate indentation based on fileype
@@ -110,6 +108,19 @@ noremap <LEADER>qq <ESC> :qa<CR>
 inoremap <LEADER>wq <ESC> :wq<CR>
 " load .vimrc
 noremap <LEADER>source <ESC> :source ~/.vimrc<CR>
+" }}}
+" Splits {{{
+set splitbelow
+set splitright
+
+" right movement
+noremap <C-K> <C-W>l
+" left movement
+noremap <C-J> <C-W>h
+" easier vertical split
+noremap <LEADER>v :vsp<CR>
+" easier horizontal split
+noremap <LEADER>h :split<CR>
 " }}}
 " Editing {{{
 inoremap <LEADER>pp <C-R>"
@@ -141,7 +152,18 @@ set tabstop=2
 " }}}
 " Search & Select {{{
 " system clipboard support
-set clipboard=unnamed
+let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ }
 " search as characters are entered
 set incsearch
 " default to ignore case
@@ -219,10 +241,10 @@ nnoremap <LEADER>"" :%s/'/"<CR>
 nnoremap <LEADER>;; :%s/;//<CR>
 " Put this in vimrc or a plugin file of your own.
 " After this is configured, :ALEFix will try and fix your JS code with ESLint.
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\}
+"let g:ale_fixers = {
+"\   'javascript': ['prettier'],
+"\   'typescript': ['prettier'],
+"\}
 " }}}
 " css & friends {{{
 " au FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -237,8 +259,28 @@ augroup END
 " au FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 " }}}
 " rust {{{
-let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
-let $RUST_SRC_PATH="/usr/local/src/rust/src"
+let g:racer_cmd="/Users/garrettmaring/.cargo/bin/racer"
+let $RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
+let g:racer_experimental_completer = 1
+autocmd BufReadPost *.rs setlocal filetype=rust
+"let g:LanguageClient_serverCommands = {
+    "\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    "\ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Maps K to hover, gd to goto definition, F2 to rename
+nnoremap <silent> K :call LanguageClient_textDocument_hover()
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()
+au FileType rust nmap <silent> <C-]> <Plug>(rust-def)
+au FileType rust nmap <silent> <C-w><C-]> <Plug>(rust-def-vertical)
+au FileType rust nmap <silent> <C-w>} <Plug>(rust-def-split)
+au FileType rust nmap <silent> <C-k> <Plug>(rust-doc)
+"let g:ale_linters = {
+            "\ 'rust': [ 'rls' ],
+            "\ }
 " }}}
 " swift {{{
 " build on every write
@@ -282,12 +324,6 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" }}}
-" HardMode {{{
-autocmd VimEnter, BufNewFile, BufReadPost * silent! call HardMode()
-
-" toggle hard mode
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 " }}}
 " Dash {{{
 nnoremap <Leader>d :Dash<CR>
@@ -370,6 +406,7 @@ set diffopt=filler,vertical
 " }}}
 " Plugin Configs }}}
 " Misc {{{
+"let g:hardtime_default_on = 1
 
 map <Leader>for :%!python -m json.tool<CR>
 " add support for local .vimrc configurations
@@ -383,8 +420,11 @@ catch
   " no-op
 endtry 
 
+" svelte
+let g:vim_svelte_plugin_load_full_syntax = 1
+
 " local .vimrc file. See http://vimdoc.sourceforge.net/htmldoc/options.html#'secure'
-" }}}
+
 "
 " This is to get tab complete with Ale
 " yeah, so inoremap just maps a command in insert mode, while disallowing using mappings for the right hand side (otherwise the tab thing would be recursive). <expr> means instead of inserting whatever follows, we’re telling vim that it’s an expression to be evaluated. <silent> I’m unsure of, not sure what happens if we don’t specify that, maybe it shows the expression in the status bar or something. After that it’s just a ternary operator; if pumvisible (“Returns non-zero when the popup menu is visible”), then send Ctrl-N, which  will tell omnicomplete to go forward one (could have also used arrow down here), otherwise just send a tab
@@ -393,3 +433,4 @@ inoremap <silent><expr> <Tab>
 " The same as above but use shift-tab to select previous
 "inoremap <silent><expr> <S-Tab>
       "\ pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" }}}
