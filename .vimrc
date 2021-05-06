@@ -35,11 +35,10 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'takac/vim-hardtime'
-Plug 'keith/swift.vim' " Swift syntax
-Plug 'mitsuse/autocomplete-swift'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'Shougo/neosnippet'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 "" Both the below plugins are needed for vim-notes
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
@@ -53,10 +52,32 @@ Plug 'reedes/vim-pencil' " Undo points, soft line wraps, general writing tools
 Plug 'reedes/vim-lexical' " Spell-check and thesaurus
 Plug 'reedes/vim-wordy' " Enforce writing best practices
 Plug 'leafOfTree/vim-svelte-plugin' 
+"" For Swift from (https://aozsky.com/swift/swift_ide)
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'mitsuse/autocomplete-swift'
+"Plug 'landaire/deoplete-swift' 
+Plug 'kballard/vim-swift'
+Plug 'keith/swift.vim'
+Plug 'aciidb0mb3r/SwiftDoc.vim'
+Plug 'kentaroi/ultisnips-swift'
+Plug 'thinca/vim-quickrun'
+Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 " }}}
 " Colors {{{
 color apprentice
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+set background=dark
+if has("gui_vimr")
+  colorscheme base16-default-dark
+else
+  "colorscheme Tomorrow-Night
+  colorscheme gruvbox
+endif
 
 autocmd ColorScheme * highlight Comment ctermfg=Red
 autocmd ColorScheme * highlight Folded ctermfg=Green cterm=NONE ctermbg=NONE
@@ -130,6 +151,8 @@ inoremap <LEADER>pp <C-R>"
 inoremap <LEADER>dd <C-O>dd
 " Replace remaing words on the line as you just did
 map <Leader>rm :s/<C-r>-/<C-r>.<CR>
+" use deploete for autocomplete
+let g:deoplete#enable_at_startup = 1
 " }}}
 " Mouse & Keyboard {{{
 " backspace works as expected
@@ -237,6 +260,8 @@ au FileType gitcommit set tw=72
 syntax enable
 
 " javascript & typescript {{{
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 " replace all single quotes
 nnoremap <LEADER>"" :%s/'/"<CR>
 " delete all semicolons
@@ -246,6 +271,7 @@ nnoremap <LEADER>;; :%s/;//<CR>
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
+\   'html': ['prettier'],
 \   'css': ['prettier'],
 \}
 "" }}}
@@ -288,7 +314,55 @@ au FileType rust nmap <silent> <C-k> <Plug>(rust-doc)
 " swift {{{
 " build on every write
 autocmd Filetype swift setlocal ts=4 sw=4 sts=0 expandtab
+" swift command --------------------------- {{{
+au FileType swift nmap <leader>r :QuickRun swiftrun<cr>
+au FileType swift nmap <leader>t :QuickRun swifttest<cr>
 " }}}
+" ctags for swift -------------------------- {{{
+let g:tagbar_type_swift = {
+  \ 'ctagstype': 'swift',
+  \ 'kinds' : [
+    \ 'e:Enums',
+    \ 't:Typealiases',
+    \ 'p:Protocols',
+    \ 's:Structs',
+    \ 'c:Classes',
+    \ 'f:Functions',
+    \ 'v:Variables',
+    \ 'E:Extensions',
+    \ 'l:Constants',
+  \ ],
+  \ 'sort' : 0
+  \ }
+" }}}
+" swiftformat ---------------------------- {{{
+  nnoremap <leader>F :!swiftformat %<cr>
+" }}}
+" autocomplete for swift ------------------- {{{
+autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
+" }}}
+" CLighter Xcode --------------------------- {{{
+" Config for CLighter
+if has('nvim')
+    let g:clamp_autostart = 1
+    let g:clamp_libclang_file = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+else
+    let g:clighter8_autostart = 1
+    let g:clighter8_libclang_file = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+  endif
+" }}}
+" swift source_kitten ---------------------- {{{
+let g:deoplete#sources#swift#source_kitten_binary = '/usr/local/bin/sourcekitten'
+let g:deoplete#sources#swift#daemon_autostart = 1
+" }}}
+" }}}
+" python {{{
+" ensure old python2.X env is optimal (:CheckHealth)
+let g:python_host_prog = "/Users/garrettmaring/.pyenv/versions/gm_neovim_2/bin/python"
+let g:python3_host_prog = "/Users/garrettmaring/.pyenv/versions/gm_neovim/bin/python"
+
+map <Leader>for :%!python -m json.tool<CR>
+" python }}}
 " Languages }}}
 " Plugin Configs {{{
 " Status Line (lightline) {{{
@@ -346,12 +420,18 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " close nerdTree if it's the only buffer left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+let NERDTreeHijackNetrw=1
+
 map <LEADER>n :NERDTreeToggle<CR>
 nnoremap <LEADER>f :GitFiles<CR>
 nnoremap <LEADER>nf :NERDTreeFind<CR>
 " }}}
 " Ale {{{
 let g:ale_completion_enabled = 1
+
+let g:ale_linters = {
+\   'python': ['pyls', 'pylint', 'mypy'],
+\}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " This is off by default.
@@ -413,7 +493,6 @@ set diffopt=filler,vertical
 " Misc {{{
 "let g:hardtime_default_on = 1
 
-map <Leader>for :%!python -m json.tool<CR>
 " add support for local .vimrc configurations
 
 " Search for a local.vim file

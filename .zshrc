@@ -254,4 +254,9 @@ SPACESHIP_PROMPT_ORDER=(
   char          # Prompt character
 )
 
+# Kitty
+alias d="kitty +kitten diff"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"

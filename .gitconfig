@@ -1,6 +1,6 @@
 [user]
 	name = Garrett Maring
-	email = garrett.maring@kernel.co
+	email = garrett.maring@gmail.com
 [colorl]
 	ui = auto
 [http]
@@ -12,3 +12,5 @@
 	required = true
 [alias]
   revert-file = !sh ~/Code/dotfiles/scripts/gitFileRevert.sh
+[core]
+  hooksPath = "/Users/garrettmaring/.hooks"

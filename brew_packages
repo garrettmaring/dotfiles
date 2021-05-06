@@ -31,3 +31,7 @@ protobuf
 boost
 kylef/formulae/swiftenv
 hub
+rbenv
+neovim
+reattach-to-user-namespace
+the_silver_searcher

@@ -27,6 +27,10 @@ append_to_path "/usr/local/share/npm/bin"
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 append_to_path "$PYENV_ROOT/bin" 
+# https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
 
 # rust
 export RUST_SRC_PATH="/usr/local/src/rust/src"
@@ -51,3 +55,9 @@ export NPM_TOKEN="e45fed38-831a-47ca-b334-5c8f6f6b371c"
 # END #
 # resources
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting
+#
+
+# https://github.com/python-pillow/Pillow/issues/4816
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"

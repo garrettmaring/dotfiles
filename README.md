@@ -1,5 +1,7 @@
 # Dippin' Dots
 
+My dotfiles
+
 ## Technology
 
 ### Terminal
@@ -9,6 +11,12 @@ Kitty
 ### Shell
 
 Zsh
+
+### Tmux
+
+> Clone Homebrew to get older versions of tmux
+>
+> `git clone https://github.com/Homebrew/homebrew-core.git`
 
 ### Editor
 
@@ -27,6 +35,14 @@ I'm using the Apprentice theme.
 [Vim](https://github.com/romainl/Apprentice)
 [Kitty](https://github.com/dexpota/kitty-themes/blob/master/themes/Apprentice.conf)
 
+
+## Python
+
+pyenv,virtualenv--make sure all working with neovim,tmux
+
+https://github.com/pyenv/pyenv-virtualenv
+
+Create virtualenv for neovim python2
 
 #### TODOs
 
@@ -49,4 +65,10 @@ I'm using the Apprentice theme.
 * (setup script) *sudo sysctl -w net.inet.udp.maxdgram=65535
 * (setup script) brew install git-lfs
 * (setup script) brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
-
+* zgen
+* rust
+* rbenv
+* color theme (vim) apprentice: git clone <https://github.com/flazz/vim-colorschemes.git> [~ vim](~/.vim)
+* spotify
+* show percentage battery
+* neovim; neovim Plug install script (https://github.com/junegunn/vim-plug) and install with `PlugInstall`
